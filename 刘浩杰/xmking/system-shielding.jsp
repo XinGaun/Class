@@ -27,11 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
-
+<style type="text/css">
+	#dd{
+		position: absolute;
+		TOP:0px;
+	}
+</style>
 <title>基本设置</title>
 </head>
 <body>
-<!--_header 作为公共模版分离出去-->
+<!--_header 作为公共模版分离出去--
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
@@ -106,9 +111,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </header>
-<!--/_header 作为公共模版分离出去-->
+<!--/_header 作为公共模版分离出去--
 
-<!--_menu 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去--
 <aside class="Hui-aside">
 	
 	<div class="menu_dropdown bk_2">
@@ -262,7 +267,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--/_menu 作为公共模版分离出去-->
 
-<section class="Hui-article-box">
+<section class="Hui-article-box" id="dd">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
 		系统管理

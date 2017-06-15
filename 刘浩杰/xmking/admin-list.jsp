@@ -28,13 +28,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <!--/meta 作为公共模版分离出去-->
-
+<style type="text/css">
+	#dd{
+		position: absolute;
+		TOP:0px;
+	}
+</style>
 <title>管理员列表 - 管理员列表 - H-ui.admin 3.0</title>
 <meta name="keywords" content="H-ui.admin 3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
 <meta name="description" content="H-ui.admin 3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-<!--_header 作为公共模版分离出去-->
+<!--_header 作为公共模版分离出去--
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
@@ -82,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </header>
 <!--/_header 作为公共模版分离出去--> 
 
-<!--_menu 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去--
 <aside class="Hui-aside">
 	
 	<div class="menu_dropdown bk_2">
@@ -176,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="dislpayArrow hidden-xs"> <a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a> </div>
 <!--/_menu 作为公共模版分离出去-->
 
-<section class="Hui-article-box">
+<section class="Hui-article-box" id="dd">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
 		管理员管理

@@ -27,11 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
-
+<style type="text/css">
+	#dd{
+		position: absolute;
+		TOP:0px;
+	}
+</style>
 <title>浏览记录</title>
 </head>
 <body>
-<!--_header 作为公共模版分离出去-->
+<!--_header 作为公共模版分离出去
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> <span class="logo navbar-slogan f-l mr-10 hidden-xs">3.0</span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
@@ -73,9 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </header>
-<!--/_header 作为公共模版分离出去-->
+<!--/_header 作为公共模版分离出去-
 
-<!--_menu 作为公共模版分离出去-->
+<!--_menu 作为公共模版分离出去
 <aside class="Hui-aside">
 	
 	<div class="menu_dropdown bk_2">
@@ -168,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </aside>
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
 <!--/_menu 作为公共模版分离出去-->
-<section class="Hui-article-box">
+<section class="Hui-article-box" id="dd">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span class="c-gray en">&gt;</span> 浏览记录 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">

@@ -27,149 +27,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
-
+<style type="text/css">
+	#dd{
+		position: absolute;
+		top:0px;
+	}
+</style>
 <title>图片列表</title>
 </head>
 <body>
 <!--_header 作为公共模版分离出去-->
-<header class="navbar-wrapper">
-	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> <span class="logo navbar-slogan f-l mr-10 hidden-xs">3.0</span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-			<nav class="nav navbar-nav">
-				<ul class="cl">
-					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.jsp')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.jsp')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.jsp')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.jsp','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-				<ul class="cl">
-					<li>超级管理员</li>
-					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-							<li><a href="#">切换账户</a></li>
-							<li><a href="#">退出</a></li>
-						</ul>
-					</li>
-					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
-					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
-							<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
-							<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
-							<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
-							<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
-							<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</header>
-<!--/_header 作为公共模版分离出去-->
 
 <!--_menu 作为公共模版分离出去-->
-<aside class="Hui-aside">
-	
-	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="article-list.jsp" title="资讯管理">资讯管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-picture">
-			<dt class="selected"><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd style="display:block">
-				<ul>
-					<li class="current"><a href="picture-list.jsp" title="图片管理">图片管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-product">
-			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="product-brand.jsp" title="品牌管理">品牌管理</a></li>
-					<li><a href="product-category.jsp" title="分类管理">分类管理</a></li>
-					<li><a href="product-list.jsp" title="产品管理">产品管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="http://h-ui.duoshuo.com/admin/" title="评论列表">评论列表</a></li>
-					<li><a href="feedback-list.jsp" title="意见反馈">意见反馈</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-member">
-			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="member-list.jsp" title="会员列表">会员列表</a></li>
-					<li><a href="member-del.jsp" title="删除的会员">删除的会员</a></li>
-					<li><a href="member-level.jsp" title="等级管理">等级管理</a></li>
-					<li><a href="member-scoreoperation.jsp" title="积分管理">积分管理</a></li>
-					<li><a href="member-record-browse.jsp" title="浏览记录">浏览记录</a></li>
-					<li><a href="member-record-download.jsp" title="下载记录">下载记录</a></li>
-					<li><a href="member-record-share.jsp" title="分享记录">分享记录</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="admin-role.jsp" title="角色管理">角色管理</a></li>
-					<li><a href="admin-users.jsp" title="用户管理">用户管理</a></li>
-					<li><a href="admin-list.jsp" title="管理员列表">管理员列表</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-tongji">
-			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="charts-1.jsp" title="折线图">折线图</a></li>
-					<li><a href="charts-2.jsp" title="时间轴折线图">时间轴折线图</a></li>
-					<li><a href="charts-3.jsp" title="区域图">区域图</a></li>
-					<li><a href="charts-4.jsp" title="柱状图">柱状图</a></li>
-					<li><a href="charts-5.jsp" title="饼状图">饼状图</a></li>
-					<li><a href="charts-6.jsp" title="3D柱状图">3D柱状图</a></li>
-					<li><a href="charts-7.jsp" title="3D饼状图">3D饼状图</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-system">
-			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="system-base.jsp" title="系统设置">系统设置</a></li>
-					<li><a href="system-category.jsp" title="栏目管理">栏目管理</a></li>
-					<li><a href="system-data.jsp" title="数据字典">数据字典</a></li>
-					<li><a href="system-shielding.jsp" title="屏蔽词">屏蔽词</a></li>
-					<li><a href="system-log.jsp" title="系统日志">系统日志</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-</aside>
-<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
-<!--/_menu 作为公共模版分离出去-->
 
-<section class="Hui-article-box">
+
+<section class="Hui-article-box" id="dd">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 图片管理 <span class="c-gray en">&gt;</span> 图片列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
