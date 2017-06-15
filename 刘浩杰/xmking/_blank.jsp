@@ -138,7 +138,7 @@
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
 			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 资讯管理<i
+				<i class="Hui-iconfont">&#xe616;</i> 订单管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
@@ -150,7 +150,7 @@
 		</dl>
 		<dl id="menu-picture">
 			<dt>
-				<i class="Hui-iconfont">&#xe613;</i> 图片管理<i
+				<i class="Hui-iconfont">&#xe613;</i> 桌台管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
@@ -162,7 +162,7 @@
 		</dl>
 		<dl id="menu-product">
 			<dt>
-				<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
+				<i class="Hui-iconfont">&#xe620;</i> 菜品管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
@@ -178,7 +178,7 @@
 		</dl>
 		<dl id="menu-comments">
 			<dt>
-				<i class="Hui-iconfont">&#xe622;</i> 评论管理<i
+				<i class="Hui-iconfont">&#xe622;</i> 部门管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
@@ -192,7 +192,7 @@
 		</dl>
 		<dl id="menu-member">
 			<dt>
-				<i class="Hui-iconfont">&#xe60d;</i> 会员管理<i
+				<i class="Hui-iconfont">&#xe60d;</i> 用户管理<i
 					class="Hui-iconfont menu_dropdown-arrow" >&#xe6d5;</i>
 			</dt>
 			<dd>
@@ -232,7 +232,7 @@
 		</dl>
 		<dl id="menu-tongji">
 			<dt>
-				<i class="Hui-iconfont">&#xe61a;</i> 系统统计<i
+				<i class="Hui-iconfont">&#xe61a;</i> 财务管理<i
 					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
 			</dt>
 			<dd>
