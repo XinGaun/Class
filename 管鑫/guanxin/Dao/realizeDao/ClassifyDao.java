@@ -2,6 +2,8 @@ package guanxin.Dao.realizeDao;
 
 import guanxin.Dao.protDao.daoProt;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class ClassifyDao extends BaseDao implements daoProt{
 		String sql = "insert into classify values(?,?)";
 		Object[] obj = new Object[]{c.getClassname(),c.getStutu()}; 		
 		return executeUpdate(sql,obj);
-	}
+	} 
 	
 	/**
 	 * 该方法实现了接口daoProt的删除数据，可以删除Classify表中的一条数据
@@ -58,6 +60,38 @@ public class ClassifyDao extends BaseDao implements daoProt{
 		}
 		Object[] obj = new Object[]{c.getStutu(),c.getClassid()};
 		return executeUpdate(sql,obj);
+	}
+	/**
+	 * 实现查询菜品信息的分页
+	 * @author Administrator 返回list结果集
+	 */
+	public List<Map<String, Object>> PagingQuery(int adsc,int linage) {
+		// TODO Auto-generated method stub
+		String sql = "select top "+linage+" * from classify where (classid not in(select top "+adsc+" classid from classify))";
+		return executeQuery(sql,null);
+	}
+	/**
+	 * 该方法返回菜类列表总数
+	 * @return 返回菜类总数
+	 */
+	public int getCount() {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		String sql ="select COUNT(*) from classify";
+		int a=0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			a = rs.getInt(1);
+			rs.close();
+			ps.close();
+			return a;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a;
 	}
 	
 }

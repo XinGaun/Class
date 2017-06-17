@@ -1,5 +1,7 @@
 package guanxin.Model.portModel;
 
+import guanxin.util.paging;
+
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +31,16 @@ public interface ModelPort {
 	 * @return
 	 */
 	public int alterclassify(Classify c);
+	/**
+	 * 分页查询菜类数据接口
+	 * @param adsc 传入现在第几页
+	 * @param linage 传入每页显示几行数据
+	 * @return 返回一个查询结果集
+	 */
+	public paging PagingQuery(Integer adsc,Integer linage);
+	/**
+	 * 获取菜类数据总数
+	 * @return 返回结果
+	 */
+	public int getCount();
 }

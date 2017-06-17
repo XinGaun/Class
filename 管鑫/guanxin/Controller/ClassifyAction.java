@@ -1,20 +1,13 @@
 package guanxin.Controller;
 
-import guanxin.Dao.protDao.daoProt;
-import guanxin.Dao.realizeDao.ClassifyDao;
-import guanxin.Model.Logic.functionClassify;
 import guanxin.Model.RealizeModel.ModelClassify;
 import guanxin.Model.portModel.ModelPort;
+import guanxin.util.paging;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.zjc.entity.Classify;
@@ -59,8 +52,9 @@ public class ClassifyAction  extends BaseAction implements ModelDriven<Classify>
 	 */
 	public String updeteClassify(){
 		dp.update(c);
+		System.out.println(c.getClassid());
 		getSession().setAttribute("addClass","插入成功"); 
-		findall();
+		pagingClassify();
 		return "findall";
 	}
 	/**
@@ -69,9 +63,31 @@ public class ClassifyAction  extends BaseAction implements ModelDriven<Classify>
 	 */
 	public String alterClassify(){
 		dp.alterclassify(c);
-		findall();
+		pagingClassify();
 		return "findall";
 	}
+	/**
+	 * 实现查询菜品的分类
+	 * @return 返回菜类分页帮助对象
+	 */
+	public String pagingClassify(){	
+		String paginationstr = getRequest().getParameter("pagin");
+		String linagestr = getRequest().getParameter("linage");
+		Integer pagination = null;
+		Integer linage = null;
+		try {
+			pagination = Integer.parseInt(paginationstr);
+			linage = Integer.parseInt(linagestr);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.getMessage();
+		}				
+		paging pg = dp.PagingQuery(pagination, linage);
+		getRequest().setAttribute("pg",pg);
+		return "findall";
+	}
+
+	
 }
 
 
