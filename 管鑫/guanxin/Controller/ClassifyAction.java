@@ -1,40 +1,76 @@
 package guanxin.Controller;
 
-import guanxin.Model.Logic.addClassify;
+import guanxin.Dao.protDao.daoProt;
+import guanxin.Dao.realizeDao.ClassifyDao;
+import guanxin.Model.Logic.functionClassify;
 import guanxin.Model.RealizeModel.ModelClassify;
 import guanxin.Model.portModel.ModelPort;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
 
-public class ClassifyAction  extends BaseAction{
-	/**
-	 * 该方法验证了Classify表中是否有相同的值
-	 * @author Administrator 有相同的值返回1，否则返回0
-	 *
-	 */
-	public String execute(){
-		super.getResponse().setContentType("text/html;charset=UTF-8");
-		String classname = super.getRequest().getParameter("classify");
-		ModelPort mp = new ModelClassify();
-		int a = mp.distinct(classname);
-		super.getOut().print(a);
-		super.getOut().flush();
-		super.getOut().close();
-		return SUCCESS;
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ModelDriven;
+import com.zjc.entity.Classify;
+
+
+public class ClassifyAction  extends BaseAction implements ModelDriven<Classify>{
+	Classify c = new Classify();
+	ModelPort dp = new ModelClassify();
+	public Classify getModel() {
+		// TODO Auto-generated method stub	
+		return c;
 	}
-	
 	/**
-	 * 该方法将数据插入数据库中的Classify表中
-	 * @return 返回值大于0为插入成功，否则插入失败
+	 * 获取菜谱表的所有信息
+	 * @return 返回菜品表所有信息
 	 */
-	public String addClassify(){
-		super.getResponse().setContentType("text/html;charset=UTF-8");
-		String classname = super.getRequest().getParameter("classify");
-		addClassify ac = new guanxin.Model.Logic.addClassify();
-		int a = ac.addClass(classname);
-		super.getOut().print(a);
-		super.getOut().flush();
-		super.getOut().close();
-		return SUCCESS;
+	public String findall(){
+		List<Map<String,Object>> ClassifyList = dp.queryall();
+		HttpSession session = getSession();
+		session.setAttribute("ClassifyList",ClassifyList);
+		return "findall";
+	}
+	/**
+	 * 验证菜类名称是否唯一
+	 * @return
+	 */
+	public String soleClassify(){
+		List<Map<String,Object>> ClassifyList = dp.queryall();
+		int a = 1;
+		System.out.println(ClassifyList.get(0).get("classname"));
+		for(int i=0;i<ClassifyList.size();i++){		
+			if(c.getClassname().equals(ClassifyList.get(i).get("classname"))){
+				a= 0;
+			}
+		}
+		getOut().print(a);
+		return null;
+	}
+	/**
+	 * 实现菜类表的插入
+	 * @return 返回插入信息
+	 */
+	public String updeteClassify(){
+		dp.update(c);
+		getSession().setAttribute("addClass","插入成功"); 
+		findall();
+		return "findall";
+	}
+	/**
+	 * 实现菜类状态的修改
+	 * @return
+	 */
+	public String alterClassify(){
+		dp.alterclassify(c);
+		findall();
+		return "findall";
 	}
 }
 

@@ -1,7 +1,7 @@
 <%@page import="guanxin.Dao.realizeDao.ClassifyDao"%>
 <%@page import="guanxin.Dao.protDao.daoProt"%>
 <%@page import="com.zjc.entity.Classify"%>
-<%@page import="guanxin.ee.querydao.QueryClassify"%>
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -47,19 +47,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>菜类管理</title>
 </head>
 <body>
-					<%
-						daoProt dp = new ClassifyDao();
-						List<Classify> ClassList = (List<Classify>)dp.query();
-						request.setAttribute("ClassList",ClassList);
-					 %>
 <section class="Hui-article-box" id="dd">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 菜品管理 <span class="c-gray en">&gt;</span>菜类管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 		
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<div class="text-c">
-				<form class="Huiform" method="post" action="" target="_self">
-					<input type="text" placeholder="菜类名称"  id="classify"  name="classify" class="input-text" style="width:120px">
+				<form class="Huiform" method="post" action="classify_updeteClassify.action" target="_self" onsubmit="return show()">
+					<input type="text" placeholder="菜类名称"  id="classify"  name="classname" class="input-text" style="width:120px">
 					
 					<span class="btn-upload form-group">
 					
@@ -70,15 +65,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<option value="1" selected>国内品牌</option>
 						<option value="0">国外品牌</option>
 					</select> -->
-					</span><button type="button" class="btn btn-success" id="addClassify" name="addClassify" ><i class="Hui-iconfont">&#xe600;</i> 添加菜类</button><span id="error" style="width:200px"> &nbsp;</span>
+					</span><button type="submit" class="btn btn-success" id="addClassify" name="addClassify" ><i class="Hui-iconfont">&#xe600;</i>添加菜类</a></button><span id="error" style="width:200px">&nbsp;</span>
 				</form>
 			</div>
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"></span> <span class="r">共有数据：<strong>${ClassifyList.size()}</strong> 条</span> </div>
 			<div class="mt-10">
 				<table class="table table-border table-bordered table-bg table-sort">
 					<thead>
 						<tr class="text-c">
-							<th width="25"><input type="checkbox" name="" value=""></th>
+							<!-- <th width="25"><input type="checkbox" name="" value=""></th> -->
 							<th width="70">菜类ID</th>
 							<!-- <th width="80">排序</th> -->
 							<th width="200">菜类名称</th>
@@ -88,16 +83,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${ClassList}" var="p">
+					<c:forEach items="${ClassifyList}" var="p">
+					
 						<tr class="text-c">
-							<td><input name="" type="checkbox" value="" ></td>
+							<!-- <td><input name="" type="checkbox" value="" ></td> -->
 							<!-- 	<td>1</td> -->
-							<td><input type="text" class="input-text text-c" value="${p.classid}"  disabled="disabled"></td>
-							<td>${p.classname}</td>
+							<td><input type="text" class="input-text text-c" value="${p.classid}"  disabled="disabled">
+							</td>
+							<td class="ere">${p.classname}</td>
 						<!-- 	<td class="text-l" id="de">这是热菜</td> -->
-							<td class="text-l">${p.stutu}</td>
-							<td class="f-14 product-brand-manage"><a style="text-decoration:none" onClick="product_brand_edit('品牌编辑','codeing.jsp','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="active_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+							<td class="text-l" style="text-align:center;">
+								<c:if test="${p.stutu==1}">未禁用<input type="text" name="stutu" value="${p.stutu}" style="display: none"/></c:if>
+								<c:if test="${p.stutu!=1}">已禁用<input type="text" name="stutu" value="${p.stutu}" style="display: none"/></c:if>
+							</td>
+							<td class="f-14 product-brand-manage"><a class="submitee" href="classify_alterClassify.action?classid=${p.classid}&stutu=${p.stutu}&classname=${p.classname}">
+								<c:if test="${p.stutu==1}">禁用</c:if>
+								<c:if test="${p.stutu!=1}">启用</c:if>
+							<i class="Hui-iconfont">&#xe6df;</i></a></td>
 						</tr>
+					
 					</c:forEach>
 					</tbody>
 				</table>
@@ -106,7 +110,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </section>
 <script type="text/javascript">
-	var a = 0;
+	
+	var a = 1;
+	/**
+	*添加菜类时验证是否输入框是否为空
+	*
+	*/
 	$("#classify").blur(
 		function(){
 			if($(this).val()==""){
@@ -114,43 +123,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}else{
 				$.ajax({
 					type:"post",
-					url:"classify_execute.action",
-					data:{"classify":$("#classify").val()},
+					url:"classify_soleClassify.action",
+					data:{"classname":$("#classify").val()},
 					dataType:"text",
-					success:function(data){
-						
-						if(data!=1){
+					success:function(data){						
+						if(data!=0){
 							$("#error").html("菜类名可用");
-							a =1;
+							a =0;
 						}else{
 							$("#error").html("<p style='color:red'>菜类名重复用</p>");
-							a= 0;
+							a=1;
 						}
 					}	
 				});
 			}
 		}
 	);
-	
-	$("#addClassify").click(
+	/**
+	*添加菜品
+	*/
+	 $("#addClassify").click(
 		function(){
-			if(a==0){
-				
+		
+			if($("#classify").val()!=null && a==0){
+				alert("添加成功!");
 			}else{
-				$.ajax({
-					type:"post",
-					url:"classify_addClassify.action",
-					data:{"classify":$("#classify").val()},
-					dataType:"text",
-					success:function(data){
-						if(data!=1){
-							alert("添加菜品失败！");
-						}else{
-							alert("添加菜品成功！");
-						}
-						
-					}
-				});
+				return false;
+			}
+		}
+	); 
+	/**
+	* 表单提交验证
+	*/
+	function show(){
+		if(a==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	var b =0;
+	$(".submitee").click(
+		function(){
+			var ee = confirm("是否修改状态");
+			if(ee==true){	
+				b =1;
+				return true;
+			}else{
+				b=0;
+				return false;
 			}
 		}
 	);

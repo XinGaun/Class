@@ -1,5 +1,5 @@
 新增加的JSP和类的说明
 
-	6.16
-		product-brand.jsp 直接替换原来xmking下的JSP
-		guanxin包直接导入项目
+	6.17
+		product-brand.jsp,_blank.jsp 直接替换原来xmking下的JSP
+		guanxin,com替换原来的包直接导入项目
