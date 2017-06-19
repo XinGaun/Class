@@ -1,8 +1,9 @@
-package com.zjc.entity;
+package zjc.entity;
 
 import java.util.Date;
 
 public class Staff {
+	private int staffId;
 	private String staffName;
 	private String sex;
 	private String age;
@@ -11,7 +12,15 @@ public class Staff {
 	private String Userpwd;
 	private String Addres;
 	private Date Rdate;
+	private Depart depart;
+	private int staffstatus;
 	
+	public int getStaffId() {
+		return staffId;
+	}
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
 	public String getStaffName() {
 		return staffName;
 	}
@@ -60,4 +69,17 @@ public class Staff {
 	public void setRdate(Date rdate) {
 		Rdate = rdate;
 	}
+	public Depart getDepart() {
+		return depart;
+	}
+	public void setDepart(Depart depart) {
+		this.depart = depart;
+	}
+	public int getStaffstatus() {
+		return staffstatus;
+	}
+	public void setStaffstatus(int staffstatus) {
+		this.staffstatus = staffstatus;
+	}
+
 }

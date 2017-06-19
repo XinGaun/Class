@@ -1,4 +1,4 @@
-package com.zjc.entity;
+package zjc.entity;
 
 import java.util.Date;
 

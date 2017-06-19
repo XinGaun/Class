@@ -1,4 +1,4 @@
-package com.zjc.entity;
+package zjc.entity;
 
 public class Order_menu {
 	private int orderID;

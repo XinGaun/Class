@@ -1,4 +1,4 @@
 新增加的JSP和类的说明
 1.staff类新加了了一个字段staffstatus int not null--员工状态
 2.zjc.entity与zhangjunchao两个包是同一级别都在src目录下
-3.Hlogin.jsp和_blank.jsp修改了，它们是同一级别，都在xmking目录下
+3.Hlogin.jsp和_blank.jsp修改了，都在xmking目录下

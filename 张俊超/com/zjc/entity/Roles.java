@@ -1,4 +1,4 @@
-package com.zjc.entity;
+package zjc.entity;
 
 public class Roles {
 	private String rolesname;

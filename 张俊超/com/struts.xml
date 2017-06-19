@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="struts-default">
+ 		<!-- 登录控制器 -->
+ 		<action name="login_*" class="zhangjunchao.Controller.StaffAction" method="{1}">
+ 			<result name="ok" type="redirect">/xmking/_blank.jsp</result>
+			<result name="error" type="redirect">/xmking/Hlogin.jsp</result>	
+		</action>
+		<!-- 菜品控制器 -->
+		<action name="classify_*" class="zhangjunchao.Controller.ClassifyAction" method="{1}">
+			<result name="success" type="redirectAction">classify_findall.action</result>
+			<result name="findall">/xmking/product-brand.jsp</result>
+		</action>
+	</package>
+</struts>    
