@@ -167,7 +167,7 @@
 			</dt>
 			<dd>
 				<ul>
-					<li><a href="classify_findall.action" title="菜类管理" target="home_iframe">菜类管理</a>
+					<li><a href="classify_pagingClassify.action" title="菜类管理" target="home_iframe">菜类管理</a>
 					</li>
 					<li><a href="product-category.jsp" title="分类管理" target="home_iframe">分类管理</a>
 					</li>
