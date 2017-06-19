@@ -1,3 +1,10 @@
 新增加的JSP和类的说明
 
 6.14 _blank.jsp 修改左边菜单框架 直接替换原来的JSP
+    1 picture-list.jsp  forEach的桌台循环 查询表单 增加餐桌 
+    2 增加了 systemadd.jsp  增加餐桌表单
+    3 增加了 ststemcatch.jsp 被查询的餐桌显示
+    4 增加了 ststemdesk.jsp 被查询的大厅显示
+    5 增加了 systemhome.jsp 被查询的包厢显示
+    6 修改了 接口： portGuan类 接口实现类：RealizeztGuan 逻辑类 ToolService
+    7 Action类 
