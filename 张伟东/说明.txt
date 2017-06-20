@@ -1,1 +1,27 @@
 新增加的JSP和类的说明
+
+
+action配置
+<package name="mode" extends="struts-default">
+	<!-- 用户登录注册 -->
+		<action name="userInfoAction_*" class="com.action.UserInfoAction" method="{1}">
+			<result name="success">/home.jsp</result>
+			<result name="error">/index.jsp</result>
+			<result name="login">/customer_login.jsp</result>
+			<result name ="order_mess">/customer_mess.jsp</result>
+			<result name="user_message">/user_message.jsp</result>
+		</action>
+		<!-- 订单详情 -->
+		<action name="order_*" class="com.action.OrderMessAction" method="{1}">
+			<result name="customer_mess">/order_details.jsp</result>
+		</action>
+		<!-- 查询菜品 -->
+		<action name="food_*" class="com.action.FoodAction" method="{1}">
+			<result name="food_details">/food_details.jsp</result>
+			<result name="success">/home.jsp</result>
+		</action>
+		<!-- 菜品分类 -->
+		 <action name="foodcategory_*" class="com.action.FoodCategoryAction" method="{1}">
+			<result name="success">/home.jsp</result>
+		</action>  
+	</package>
