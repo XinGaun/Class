@@ -76,5 +76,19 @@ public class ToolService {
 	public List<Map <String,Object>> gethomedesknotuse(){
 		return pt.gethomedesknotuse();
 	}
+	/**
+	 * 查询人数大于num的餐桌
+	 * @return
+	 */
+	public List<Map <String,Object>> penum(int num){
+		return pt.peDesknum(num);
+	}
+	/**
+	 * 查询人数大于num的包厢
+	 * @return
+	 */
+	public List<Map <String,Object>> peHomeDesknum(int num) {
+		return pt.peHomeDesknum(num);
+	}
 }
 

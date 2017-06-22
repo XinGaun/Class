@@ -30,13 +30,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 <style type="text/css">
-	#dd{
+     #dd{
 		position: absolute;
 		top:0px;
 	}
+	#desk{
+		height:1000px;
+	}
+	#homedesk{
+		height:1000px;
+		display:none;
+	}
+	.col-md-1{
+		height:80px;
+		margin:10px;
+		width: 100px;
+		border: 1px solid #FFCCFF;
+		background: #0099FF;
+	}
+	.div-bt{
+		margin-left:30px;
+	}
+	#div-li ul li{
+		color:#FFFFFF;
+	}
+	.modal-body{
+		margin-left:100px;
+	}
+	.modal-content{
+		
+		margin-top:50px;
+	}
+	.content{
+		height:100px;
+	}
 </style>
 <title>图片列表</title>
-<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script></head>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script><script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script></head>
 <body>
 <!--_header 作为公共模版分离出去-->
 
@@ -44,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <section class="Hui-article-box" id="dd">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 桌台管理 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 开台 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<!-- <div class="text-c"> 日期范围：
@@ -55,41 +85,109 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜图片</button> 
 			</div>-->
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><a href="login_add.action" onclick="datadel()" class="btn btn-danger radius"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> 增加餐桌</a> </span> <span class="r"><strong></strong> </span> </div>
-			<div>
-				<form action="login_query.action" method="post">
-					桌号:<input type="text" name="information"><input type="submit" value="查询">
-					<a class="btn btn-primary" href="login_getdesk.action">大厅</a>
-					<a class="btn btn-primary" href="login_gethomedesk.action">包厢</a>
-				</form>
-			</div>
 			
-			<div class="mt-20">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
-					<thead>
-						<tr class="text-c">
-							<th width="80">桌台号</th>
-							<th width="100">桌台人数</th>
-							<th width="100">桌台状态</th>
-							<th width="100">桌台种类</th>
-							<th width="100">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach items="${list }" var="li">
-						<tr class="text-c">
-							<td>${li.deskID }</td>
-							<td>${li.deskSize}</td>
-							<td>${li.statuname}</td>
-							<td id="td">${li.ztclassname}</td>
-							<td class="td-manage" ><a style="text-decoration:none" class="ml-5 a"   href="login_update.action?user=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6df;</i>使用</a> <a style="text-decoration:none" class="ml-5 a"  href="login_update1.action?use=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6e2;</i>取消</a></td>
-						</tr>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">普通餐桌</button><button type="button" class="btn btn-primary" onclick="changehome()">包厢</button> </span> <span class="r"><strong></strong> </span> </div>
+			
+				<div class="mt-20 ">
+					<div  id="desk" class="col-md-10">
+					<c:forEach items="${desklistone}" var="li">
+						<div class="col-md-1 btn btn-default" id="div-li"> 
+							<ul>
+								<li>桌号:${li.deskID }</li>
+								<li class="li">状态:${li.statuname}</li>
+								
+							</ul>
+						</div>
 					</c:forEach>
-					</tbody>
-				</table>
+				</div>
+				<div id="homedesk" class="col-md-10">
+					<c:forEach items="${desklistsecond}" var="li">
+						<div class="col-md-1  btn btn-default" id="div-li">
+							<ul >
+								<li>桌号:${li.deskID }</li>
+								<li class="li">状态:${li.statuname}</li>
+								
+							</ul>
+						</div>
+					</c:forEach>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">开台</button>
+
+					<div class="modal fade bs-example-modal-sm div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+					  <div class="modal-dialog modal-sm" role="document">
+					    <div class="modal-content content">
+					      	<form action="login_peNum.action" method="get" onsubmit="return validate_form()">	
+									人数:<input type="text" id="text" name="peosonnum" onFocus="number()" ><span id="span"></span>
+									 
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
+										<input type="submit" id="input" class="btn btn-primary" value="确定" >
+									</div> 
+						 	</form> 
+					    </div>
+					  </div>
+					</div>
+				</div>
+				
+				<div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal">清台</button>
+					<div class="modal fade bs-example-modal div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+					  <div class="modal-dialog modal-sm" role="document">
+					    <div class="modal-content">
+					      	<form action="login_updateFree.action" method="get">	
+									桌号<input type="text" name="deskidone" id="input_desk">	<span id="span_desk"></span>
+									<div class="modal-footer">  
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
+										<input type="submit" class="btn btn-primary" value="确定" id="input_close">
+									</div> 
+						 	</form>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-s">催菜</button>
+					<div class="modal fade bs-example-modal-s div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+					  <div class="modal-dialog modal-sm" role="document">
+					    <div class="modal-content">
+					      	<form action="login_peNum.action" method="get">	
+									桌号:<input type="text" name="peosonnum">
+									<!--  <input type="submit" class="btn btn-primary" value="查询"> -->
+									<div class="modal-footer">  
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
+										<input type="submit" class="btn btn-primary" value="确定">
+									</div> 
+						 	</form>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<div>
+					<a class="btn btn-primary" href="login_getDesknouse.action">转台</a>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal1">结账</button>
+					<div class="modal fade bs-example-modal1 div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+					  <div class="modal-dialog modal-sm" role="document">
+					    <div class="modal-content">
+					      	<form action="login_checkout.action" method="get">	
+									桌号:<input type="text" id="text1" name="desknum"><span id="span1"></span>
+									<div class="modal-footer">  
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
+										<input type="submit" class="btn btn-primary" id="input1" value="确定">
+									</div> 
+						 	</form>
+					    </div>
+					  </div>
+					</div>
+				</div>		
+					
+					
 			</div>
 		</article>
 	</div>
+	
 </section>
 
 <!--_footer 作为公共模版分离出去-->
@@ -103,7 +201,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+	$(function(){
+		
+	});
+	$("#input1").click(function(){
+		var aa = $("#text1").val();
+ 		for ( var i = 0; i < aa.length; i++) {
+			var a = aa.charAt(i);
+			var num = parseInt(a);
+			var string = /^[0-9]/;
+			if(!string.test(num)){
+				$("#span1").html("请输入正确格式");
+				return(false);
+			}
+		}
+		return(true);	
+	});
+	$("#input_close").click(function(){
+		var aa = $("#input_desk").val();
+ 		for ( var i = 0; i < aa.length; i++) {
+			var a = aa.charAt(i);
+			var num = parseInt(a);
+			var string = /^[0-9]/;
+			if(!string.test(num)){
+				$("#span_desk").html("请输入正确格式");
+				return(false);
+			}
+		}
+		return(true);	
+	});
+	$("#input_desk").click(function(){
+		$("#span_desk").html("请输入数字");
+	});
+	$("#text1").click(function(){
+		$("#span1").html("请输入数字");
+	});
+ 	$("#input").click(function(){
+ 		var aa = $("#text").val();
+ 		for ( var i = 0; i < aa.length; i++) {
+			var a = aa.charAt(i);
+			var num = parseInt(a);
+			var string = /^[0-9]/;
+			if(!string.test(num)){
+				$("#span").html("请输入正确格式");
+				return(false);
+			}
+				
+		}
+		return(true);
+ 	});
+	function changedesk(){
+		document.getElementById("homedesk").style.display="none";
+		document.getElementById("desk").style.display="block";
+	}
+	function changehome(){
+		document.getElementById("homedesk").style.display="block";
+		document.getElementById("desk").style.display="none";
+	}
+	function number(){
+		document.getElementById("span").innerHTML="输入数字";
+	}
   $(".a").click(function(){
   	var r=confirm("是否修改状态");
   if (r==true)

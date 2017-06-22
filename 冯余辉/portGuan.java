@@ -65,4 +65,14 @@ public interface portGuan {
 	 * @return
 	 */
 	public List<Map <String,Object>> gethomedesknotuse();
+	/**
+	 * 查询人数大于num的餐桌
+	 * @return
+	 */
+	public List<Map <String,Object>> peDesknum(int num);
+	/**
+	 * 查询人数大于num的包厢
+	 * @return
+	 */
+	public List<Map <String,Object>> peHomeDesknum(int num);
 }

@@ -174,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
 <!--/_menu 作为公共模版分离出去-->
 <section class="Hui-article-box" id="dd">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 数据字典 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 添加桌台 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 		<!--  
@@ -221,11 +221,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>-->
 				<form action="login_adddesk.action" method="get">
 					<div>
-							
-							桌号人数：<input type="text" name="desksize"><br>
-							
-							桌号种类：<input type="text" name="deskclass"><br>
-							<input type="submit" value="提交">
+							桌号人数：<input type="text" id="input1" name="desksize"><span id="span1"></span><br>
+							<p>1:大厅2:包厢</p>
+							桌号种类：<input type="text" id="input2" name="deskclass" onFocus="touch()"><span id="span2"></span><br>
+							<input type="submit" class="btn btn-default" id="input" value="添加"><a onclick="location.href='picture-list.jsp'"class="btn btn-default">取消</a>
 					</div>
 				</form>
 			</div>
@@ -239,11 +238,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.page.js"></script> 
 <!--/_footer /作为公共模版分离出去--> 
 
+
 <!--请在下方写此页面业务相关的脚本--> 
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
+$("#input").click(function(){
+ 		var aa = $("#input1").val();
+ 		var bb = $("#input2").val();
+ 		for ( var i = 0; i < aa.length; i++) {
+	 		for ( var j = 0; j < bb.length; j++) {
+				var a = aa.charAt(i);
+				var b = bb.charAt(j);
+				var num = parseInt(a);
+				var num1 = parseInt(b);
+				var string = /^[0-9]/;
+				if(!string.test(num)){
+					$("#span1").html("请输入正确格式");
+					return(false);
+				}else if(!string.test(num1)){
+					$("#span2").html("请输入正确格式");
+					return(false);
+				}	
+			}			
+		}
+		return(true);
+ 	});
+function touch(){
+	document.getElementById("span2").innerHTML="1或者2";
+}
 $('.table-sort').dataTable({
 	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 	"bStateSave": true,//状态保存

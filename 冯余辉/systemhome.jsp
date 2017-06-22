@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><a href="login_add.action" onclick="datadel()" class="btn btn-danger radius"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> 增加餐桌</a> </span> <span class="r"><strong></strong> </span> </div>
 			<div>
 				<form action="login_query.action" method="post">
-					桌号:<input type="text" name="information"><input type="submit" value="查询">
+					桌号:<input type="text" name="information"><input class="btn btn-primary" type="submit" value="查询">
 					<a class="btn btn-primary" href="login_getdesk.action">大厅</a>
 					<a class="btn btn-primary" href="login_gethomedesk.action">包厢</a>
 				</form>

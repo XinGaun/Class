@@ -30,11 +30,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
 <!--/meta 作为公共模版分离出去-->
 <style type="text/css">
+	#homedesk{
+		display:none;
+	}
 	#dd{
 		position: absolute;
 		top:0px;
 	}
+	.col-md-1{
+		height:80px;
+		margin:10px;
+		width: 100px;
+		border: 1px solid #FFCCFF;
+		background: #0099FF;
+		
+	}
+	#div-li ul li{
+		color:#FFFFFF;
+	}
 </style>
+<script>
+	function changedesk(){
+		document.getElementById("homedesk").style.display="none";
+		document.getElementById("desk").style.display="block";
+	}
+	function changehome(){
+		document.getElementById("homedesk").style.display="block";
+		document.getElementById("desk").style.display="none";
+	}
+</script>
 <title>图片列表</title>
 <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script></head>
 <body>
@@ -44,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <section class="Hui-article-box" id="dd">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 桌台管理 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 开台 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<!-- <div class="text-c"> 日期范围：
@@ -55,37 +79,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜图片</button> 
 			</div>-->
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><a href="login_add.action" onclick="datadel()" class="btn btn-danger radius"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> 增加餐桌</a> </span> <span class="r"><strong></strong> </span> </div>
-			<div>
-				<form action="login_query.action" method="post">
-					桌号:<input type="text" name="information"><input class="btn btn-primary" type="submit" value="查询">
-					<a class="btn btn-primary" href="login_getdesk.action">大厅</a>
-				 	<a class="btn btn-primary" href="login_gethomedesk.action">包厢</a>
-				</form>
+			<a onclick="location.href='systemopendesk.jsp'"class="btn btn-default">返回</a>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">可用的大厅</button><button type="button" class="btn btn-primary" onclick="changehome()">可用的包厢</button> </span> <span class="r"><strong></strong> </span> </div>
+			
+			<div  id="desk" class="col-md-10">
+				<c:forEach items="${list}" var="li">
+					<div class="col-md-1 btn btn-default" id="div-li"> 
+						<ul >
+							<li>桌号:${li.deskID }</li>
+							<li>人数:${li.deskSize }</li>
+							<li><a href="login_opendesk.action?opendeskid=${li.deskID }">开台</a></li>
+						</ul>
+					</div>
+				</c:forEach>
 			</div>
-			<div class="mt-20">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
-					<thead>
-						<tr class="text-c">
-							<th width="80">桌台号</th>
-							<th width="100">桌台人数</th>
-							<th width="100">桌台状态</th>
-							<th width="100">桌台种类</th>
-							<th width="100">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach items="${desklist }" var="li">
-						<tr class="text-c">
-							<td>${li.deskID }</td>
-							<td>${li.deskSize}</td>
-							<td>${li.statuname}</td>
-							<td id="td">${li.ztclassname}</td>
-							<td class="td-manage" ><a style="text-decoration:none" class="ml-5 a"   href="login_update.action?user=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6df;</i>使用</a> <a style="text-decoration:none" class="ml-5 a"  href="login_update1.action?use=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6e2;</i>取消</a></td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
+			<div id="homedesk" class="col-md-10">
+				<c:forEach items="${homelist}" var="li">
+					<div class="col-md-1  btn btn-default" id="div-li">
+						<ul >
+							<li>桌号:${li.deskID }</li>
+							<li>人数:${li.deskSize }</li>
+						<li><a href="login_opendesk.action?opendeskid=${li.deskID }">开台</a></li>
+						</ul>
+					</div>
+				</c:forEach>
+			</div>
+			
 			</div>
 		</article>
 	</div>
@@ -207,4 +226,3 @@ function picture_del(obj,id){
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
-

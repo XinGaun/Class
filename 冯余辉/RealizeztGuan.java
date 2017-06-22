@@ -109,4 +109,22 @@ public class RealizeztGuan implements portGuan{
 		String sql = "select d.deskID ,d.deskSize,z.ztclassname ,s.statuname from Desk d ,ztclass z,statu s where d.sta= s.statuid and d.ztclassid = z.ztclassid and d.ztclassid = 2 and d.sta = 2";
 		return db.executeQuery(sql, null);
 	}
+	/**
+	 * 查询人数大于num的桌子
+	 * @return
+	 */
+	public List<Map <String,Object>> peDesknum(int num){
+		String sql = "select d.deskID ,d.deskSize,z.ztclassname ,s.statuname from Desk d ,ztclass z,statu s where d.sta= s.statuid and d.ztclassid = z.ztclassid and d.sta = 2 and  d.ztclassid = 1 and deskSize >="+num+" ";
+		Object[]param = new Object[]{num};
+		return db.executeQuery(sql, param);
+	}
+	/**
+	 * 查询人数大于num的包厢
+	 * @return
+	 */
+	public List<Map <String,Object>> peHomeDesknum(int num){
+		String sql = "select d.deskID ,d.deskSize,z.ztclassname ,s.statuname from Desk d ,ztclass z,statu s where d.sta= s.statuid and d.ztclassid = z.ztclassid and d.sta = 2 and  d.ztclassid = 2 and deskSize >="+num+" ";
+		Object[]param = new Object[]{num};
+		return db.executeQuery(sql, param);
+	}
 }

@@ -23,6 +23,37 @@ public class Action extends Bseaction {
 	private String information;//查询input的数据
 	private String user;//桌号
 	private String use;//桌号
+	private String deskidone;//桌号
+	private String deskid1;//转台桌号
+	private String deskid2;//转台桌号
+	private String desknum;//结账桌号
+	private String opendeskid;//开台桌号
+	public String getOpendeskid() {
+		return opendeskid;
+	}
+	public void setOpendeskid(String opendeskid) {
+		this.opendeskid = opendeskid;
+	}
+	public String getDesknum() {
+		return desknum;
+	}
+	public void setDesknum(String desknum) {
+		this.desknum = desknum;
+	}
+	public String getDeskidone() {
+		return deskidone;
+	}
+	public void setDeskidone(String deskidone) {
+		this.deskidone = deskidone;
+	}
+	private String peosonnum;//人数
+	
+	public String getPeosonnum() {
+		return peosonnum;
+	}
+	public void setPeosonnum(String peosonnum) {
+		this.peosonnum = peosonnum;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -58,6 +89,18 @@ public class Action extends Bseaction {
 	}
 	public void setList(List<DeskClassGuan> list) {
 		this.list = list;
+	}
+	public String getDeskid1() {
+		return deskid1;
+	}
+	public void setDeskid1(String deskid1) {
+		this.deskid1 = deskid1;
+	}
+	public String getDeskid2() {
+		return deskid2;
+	}
+	public void setDeskid2(String deskid2) {
+		this.deskid2 = deskid2;
 	}
 	/**
 	 * 显示页面
@@ -111,11 +154,11 @@ public class Action extends Bseaction {
 	 * @return
 	 */
 	public String update(){
-		HttpServletResponse reponse = ServletActionContext.getResponse();
 		int desk = Integer.parseInt(user);
 		ts.update(1, desk);
 		return save();
 	}
+	
 	/**
 	 * 修改餐桌状态-空闲
 	 */
@@ -123,6 +166,17 @@ public class Action extends Bseaction {
 		int desk = Integer.parseInt(use);
 		ts.update(2, desk);
 		return save();
+	}
+	/**
+	 * 修改餐桌状态-空闲-清台
+	 */
+	public String updateFree(){
+		if("".equals(getDeskidone())){
+			return save1();
+		}
+		int desk = Integer.parseInt(deskidone);
+		ts.update(2, desk);
+		return save1();
 	}
 	/**
 	 * 获取未使用餐桌 
@@ -136,25 +190,79 @@ public class Action extends Bseaction {
 		return "homepage";
 	}
 	/**
-	 * 获取桌子  包厢 
+	 * 获取大厅  包厢 
 	 */
 	public String save1(){
 		List<Map<String,Object>> list1= ts.getdeskone();
 		List<Map<String,Object>> list2= ts.getdesksecond();
 		super.setSession("desklistone",list1);
 		super.setSession("desklistsecond", list2);
-		return "desk";
+		return "opendesk";
 	}
+	/**
+	 * 获取大厅
+	 * @return
+	 */
 	public String getdesk(){
 		List<Map<String,Object>> listdesk= ts.getdeskone();
 		super.setSession("desklist",listdesk);
-		System.out.print(listdesk.get(1));
 		return "deskone";
 	}
+	/**
+	 * 获取包厢
+	 * @return
+	 */
 	public String gethomedesk(){
 		List<Map<String,Object>> listdeskhome= ts.getdesksecond();
 		super.setSession("homedesklist",listdeskhome);
 		return "homedesk";
 	}
-	
+	/**
+	 * 根据人数查询餐桌
+	 * @return
+	 */
+	public String peNum(){
+		if("".equals(getPeosonnum())){
+			return save1();
+		}
+		int num = Integer.parseInt(peosonnum);
+		List<Map<String,Object>> listdesk= ts.penum(num);
+		List<Map<String,Object>> listhomedesk= ts.peHomeDesknum(num);
+		super.setSession("list",listdesk);
+		super.setSession("homelist", listhomedesk);
+		return "freedesk";
+	}
+	/**
+	 * 转台 -修改状态
+	 */
+	public String change(){
+		if("".equals(getDeskid1()) || "".equals(getDeskid2()) ){	
+			return "homepage";
+		}
+		int deskid1 = Integer.parseInt(getDeskid1());
+		int deskid2 = Integer.parseInt(getDeskid2());
+		ts.update(2, deskid1);
+		ts.update(1, deskid2);
+		return save1();
+	}
+	/**
+	 * 结账
+	 * @return
+	 */
+	public String checkout(){
+		if("".equals(getDesknum()) || getDesknum()==null){	
+			return "opendesk";
+		}
+		int deskid1 = Integer.parseInt(desknum);
+		ts.update(2, deskid1);
+		return save1();
+	}
+	/**
+	 * 开台
+	 */
+	public String opendesk(){
+		int desk= Integer.parseInt(opendeskid);
+		ts.update(1, desk);
+		return save1();
+	}
 }
