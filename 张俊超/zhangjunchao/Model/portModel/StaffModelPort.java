@@ -34,4 +34,10 @@ public interface StaffModelPort {
 	 * @return
 	 */
 	public int querysingle(Staff sta);
+	/**
+	 /**
+	 * 创建模糊查询用户信息接口
+	 * @return
+	 */
+	public List<Map<String, Object>> fuzzyquerystaff();
 }

@@ -33,4 +33,9 @@ public interface StaffDaoPort {
 	 * @return
 	 */
 	public int querysingle(Staff sta);
+	/**
+	 * 模糊用户信息查询接口
+	 * @return
+	 */
+	public List<Map<String, Object>> fuzzyquerystaff();
 }

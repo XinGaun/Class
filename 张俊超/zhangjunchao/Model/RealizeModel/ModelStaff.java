@@ -51,4 +51,12 @@ public class ModelStaff implements StaffModelPort {
 		// TODO Auto-generated method stub
 		return staport.querysingle(sta);
 	}
+	/**
+	 * 实现模糊查询用户类所有信息
+	 * @return 返回list合集
+	 */
+	public List<Map<String, Object>> fuzzyquerystaff() {
+		// TODO Auto-generated method stub
+		return staport.fuzzyquerystaff();
+	}
 }
