@@ -1,4 +1,4 @@
-package com.util;
+package zwd.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ public class Pool {
 		getdatasource();
 	}
 	/**getdatasource()
-	 * ´´½¨Ò»¸öÁ¬½Ó³Ø
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½
 	 * 
 	 */
 	public void getdatasource(){
@@ -24,7 +24,7 @@ public class Pool {
 		datasource.setPassword("123456");	
 	}
 	/**getConnection()
-	 * »ñÈ¡Ò»¸öConnectionÁ¬½Ó
+	 * ï¿½ï¿½È¡Ò»ï¿½ï¿½Connectionï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	public Connection getConnection(){
@@ -41,7 +41,7 @@ public class Pool {
 	}
 	/**
 	 * close()
-	 * ¹Ø±Õdatasource
+	 * ï¿½Ø±ï¿½datasource
 	 */
 	public void close(){
 		try {

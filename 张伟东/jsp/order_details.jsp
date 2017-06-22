@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	
 	  	<span style="margin-left:0px; width:120px;">菜品名称</span>
 	  	<span  style="margin-left:120px; width:120px;" > 数量</span>
-	  	<span >金额</span>
+	  	<span >菜品单价</span>
 	  	<span style="margin-left:114px; width:40px;">小计</span>
 	  </div>
 	  <div class="panel-body" style="margin-left:25px" >
@@ -180,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    		<td>${fod.foodName }</td>
 	    		<td>${fod.num }份</td>
 	    		<td>${fod.foodPrice }元</td>
-	    		<td>${fod.countPrice }元</td>
+	    		<td>${fod.countMoney }元</td>
 	    	</tr>
 	    	</c:forEach> 
 		 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.util;
+package zwd.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ public class FoverTime {
 	 */
 	public static Date stringToDate(String date){
 		Date strDate=null;
-		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd/HH:mm:ss");
+		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			strDate=time.parse(date);
 		} catch (ParseException e) {

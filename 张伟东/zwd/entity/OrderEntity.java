@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.entity;
+package zwd.entity;
 
 import java.util.Date;
 
@@ -16,9 +16,44 @@ public class OrderEntity {
 	private String orderStatus;//订单状态
 	private Date orderTime;//订单时间
 	private String payway;//支付方式
-	private int countPrice;//总价
 	private String fooddMess;//菜品说明
+	private String Mobile;//用户手机号
+	private Date endTime;//订单完成时间
+	private Integer sort;//排序
+	private Integer orderweight;//权重
+	private float countPrice;
 	
+	
+	public float getCountPrice() {
+		return countPrice;
+	}
+	public void setCountPrice(float countPrice) {
+		this.countPrice = countPrice;
+	}
+	public String getMobile() {
+		return Mobile;
+	}
+	public void setMobile(String mobile) {
+		Mobile = mobile;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public Integer getSort() {
+		return sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+	public Integer getOrderweight() {
+		return orderweight;
+	}
+	public void setOrderweight(Integer orderweight) {
+		this.orderweight = orderweight;
+	}
 	public String getFooddMess() {
 		return fooddMess;
 	}
@@ -49,12 +84,5 @@ public class OrderEntity {
 	public void setPayway(String payway) {
 		this.payway = payway;
 	}
-	public int getCountPrice() {
-		return countPrice;
-	}
-	public void setCountPrice(int countPrice) {
-		this.countPrice = countPrice;
-	}
-	
 	
 }

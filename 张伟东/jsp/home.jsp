@@ -1,5 +1,5 @@
-<%@page import="com.biz.UserInfoBiz"%>
-<%@page import="com.biz.imp.UserInfoBizImp"%>
+<%@page import="zwd.biz.UserInfoBiz"%>
+<%@page import="zwd.biz.imp.UserInfoBizImp"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -268,7 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="row" style="width:1000px; margin-left:0px;" >
 						  <div class="col-sm-12 col-md-4">
 						    <div class="thumbnail">
-						      <img data-src="holder.js/300x200" alt="..."src="images/food1.jpg"style=" width:100%;">
+						      <img data-src="holder.js/300x200" alt="..."src="images/food1.jpg	"<%--  src="${faf.picture }" --%>style=" width:100%;">
 						      <div class="caption">
 						        <h3 style="text-align:center">${ffbs.foodName}</h3>
 						         <p style="text-align:center">${ffbs.foodPrice }元</p>
@@ -283,13 +283,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div id="findAll">
-	<c:if test="${findFoodBySearch==null }"><!-- 没有搜索 -->
-		<c:if test="${findOndFoodCategory==null }"><!-- 无种类查询 -->
+		<c:if test="${(findOndFoodCategory==null)and(findFoodBySearch==null)}"><!-- 种类查询 -->
 		<c:forEach items="${findAllFoods}" var="faf">
 			<div class="row" style="width:1000px; margin-left:0px;" >
 				  <div class="col-sm-12 col-md-4">
 				    <div class="thumbnail">
-				      <img data-src="holder.js/300x200" alt="..."src="images/food1.jpg"style=" width:100%;">
+				      <img data-src="holder.js/300x200" alt="..." src="images/food1.jpg	"<%--  src="${faf.picture }" --%>style=" width:100%;">
 				      <div class="caption">
 				        <h3 style="text-align:center">${faf.foodName}</h3>
 				         <p style="text-align:center">${faf.foodPrice }元</p>
@@ -301,17 +300,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  </div>
 			</c:forEach>
 		</c:if>
-	</c:if>
 	</div>
 	
 	<div id="findOneType">
 	<!-- 查询一种 -->
-		<c:if test="${findOndFoodCategory!=null }">
+		<c:if test="${(findOndFoodCategory!=null)and(findFoodBySearch==null) }">
 			<c:forEach items="${findOndFoodCategory}" var="fofc">
 				<div class="row" style="width:1000px; margin-left:0px;" >
 					  <div class="col-sm-12 col-md-4">
 					    <div class="thumbnail">
-					      <img data-src="holder.js/300x200" alt="..."src="images/food1.jpg"style=" width:100%;">
+					      <img data-src="holder.js/300x200" alt="..."src="images/food1.jpg	"<%--  src="${faf.picture }" --%>style=" width:100%;">
 					      <div class="caption">
 					        <h3 style="text-align:center">${fofc.foodName}</h3>
 					         <p style="text-align:center">${fofc.foodPrice }元</p>
@@ -346,7 +344,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
   </body>
   <script type="text/javascript">
-	  $("#search_btn").click(function(){
+	/*   
+	//提交搜索查询
+	$("#search_btn").click(function(){
 	  		var searchfood = $("#searchfood").val();
 	  		$.ajax({
 	  			type:"post",
@@ -359,7 +359,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		})		
 	  });
   
-  
+   */
   
 /*   $("#login_btn").click(function(){
 		var Mobile=$("#Mobile").val();

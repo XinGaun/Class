@@ -1,14 +1,18 @@
 /**
  * 
  */
-package com.dao.imp;
+package zwd.dao.imp;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.dao.UserInfoDao;
-import com.entity.UserInfo;
-import com.util.BaseDaoZ;
+import zwd.dao.UserInfoDao;
+import zwd.entity.OrderEntity;
+import zwd.entity.UserInfo;
+import zwd.util.BaseDaoZ;
+import zwd.util.FoverTime;
+
 
 /**
  * @描述：
@@ -101,6 +105,39 @@ public class UserInfoDaoImp extends BaseDaoZ implements UserInfoDao {
 	public List<Map<String, Object>> findAllFoodsBySearch(String search) {
 		String sql = "select * from menu where foodName like '%"+search+"%'"; 
 		return executeQuery(sql, null);
+	}
+
+	//添加订单
+	public int addOrders(OrderEntity order) {
+		String sql ="insert into user_order(payway,countMoney,Mobile,sort) values(?,?,?,?)";
+		Object [] params = {"支付宝",0.0,order.getMobile(),order.getSort()};
+		return executeUpdate(sql, params);
+	}
+	//根据订单id查看订单详情,
+	public List<Map<String, Object>> findOrdersByMobile(String Mobile) {
+		String sql ="select top(1) * from user_order where Mobile=? order by orderTime desc ";
+		Object [] params={Mobile};
+		return executeQuery(sql, params);
+	}
+	//添加订单详情表
+	public int addOrder_details(int orderID, int foodID, int num,
+			float countMoney) {
+		String sql ="insert into order_details values(?,?,?,?)";
+		Object [] params={orderID,foodID,num,countMoney};
+		return executeUpdate(sql, params);
+	}
+	//根据菜名查询菜品的id
+	public List<Map<String, Object>> findFoodIDByFoodName(String foodName) {
+		String sql="select * from menu where foodName=?";
+		Object[]params={foodName};
+		return executeQuery(sql, params);
+	}
+
+	//修改订单总价钱
+	public int updteOrderCountMoney(int orderID,float countMoney) {
+		String sql = "update user_order set countMoney =? where orderID=?";
+		Object [] params ={countMoney,orderID};
+		return executeUpdate(sql, params);
 	}
 
 

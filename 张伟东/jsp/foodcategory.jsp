@@ -1,5 +1,5 @@
-<%@page import="com.biz.UserInfoBiz"%>
-<%@page import="com.biz.imp.UserInfoBizImp"%>
+<%@page import="zwd.biz.UserInfoBiz"%>
+<%@page import="zwd.biz.imp.UserInfoBizImp"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%

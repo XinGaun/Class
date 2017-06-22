@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.entity;
+package zwd.entity;
 
 /**
  * @描述：用户实体类

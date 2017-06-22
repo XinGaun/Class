@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.action;
+package zwd.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,15 +20,16 @@ import net.sf.json.processors.JsonBeanProcessor;
 
 import org.apache.struts2.ServletActionContext;
 
+import zwd.biz.UserInfoBiz;
+import zwd.biz.imp.UserInfoBizImp;
+import zwd.entity.OrderEntity;
+import zwd.entity.UserInfo;
+import zwd.util.BaseAction;
+
 import com.alibaba.fastjson.JSON;
-import com.biz.UserInfoBiz;
-import com.biz.imp.UserInfoBizImp;
-import com.entity.OrderEntity;
-import com.entity.UserInfo;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import com.util.BaseAction;
 
 /**
  * @描述：
@@ -57,9 +58,10 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 //用户注册
 
 	public String uersReg()  {
-			uib.addUser(ui);
-			session.clear();
-			session.put("Mobile", ui.getMobile());
+		//System.out.println("1");
+			uib.addUser(ui);//添加
+			session.clear();//清空session
+			session.put("Mobile", ui.getMobile());//存储手机号
 			List<Map<String, Object>> findUser = uib.findUser(ui.getMobile());//根据手机号查询个人信息
 			session.put("user", findUser);
 			return "success";
@@ -181,10 +183,17 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		//session有值，进入我的账户
 		else{*/
 			//System.out.println(ui.getMobile());
-			List<Map<String, Object>> findOrders = uib.findOrders(ui.getMobile());//调用查询订单方法
+			Object object = session.get("Mobile");//获取session里的手机号
+			if(object==null){
+				return "login";
+			}else{
+			String sessionStr = object.toString();
+			System.out.println(sessionStr);
+			List<Map<String, Object>> findOrders = uib.findOrders(sessionStr);//调用查询订单方法
 			session.put("findOrders", findOrders);//将查询到的list放到session
 			return "order_mess";
 			}
+		}
 	//查看订单详情
 	public String findOrdersDetails(){
 		String oderIDStr = request.getParameter("oderID");

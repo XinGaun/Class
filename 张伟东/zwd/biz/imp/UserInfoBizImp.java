@@ -1,15 +1,17 @@
 /**
  * 
  */
-package com.biz.imp;
+package zwd.biz.imp;
 
 import java.util.List;
 import java.util.Map;
 
-import com.biz.UserInfoBiz;
-import com.dao.UserInfoDao;
-import com.dao.imp.UserInfoDaoImp;
-import com.entity.UserInfo;
+import zwd.biz.UserInfoBiz;
+import zwd.dao.UserInfoDao;
+import zwd.dao.imp.UserInfoDaoImp;
+import zwd.entity.OrderEntity;
+import zwd.entity.UserInfo;
+
 
 /**
  * @描述：用户实现类
@@ -76,6 +78,27 @@ public class UserInfoBizImp implements UserInfoBiz {
 	public List<Map<String, Object>> findAllFoodsBySearch(String search) {
 		
 		return uid.findAllFoodsBySearch(search);
+	}
+	//添加订单
+	public int addOrders(OrderEntity order) {
+		return uid.addOrders(order);
+	}
+	//根据个人手机号查询降序订单
+	public List<Map<String, Object>> findOrdersByMobile(String Mobile) {
+		return uid.findOrdersByMobile(Mobile);
+	}
+	//添加订单详情表
+	public int addOrder_details(int orderID, int foodID, int num,
+			float countMoney) {
+		return uid.addOrder_details(orderID, foodID, num, countMoney);
+	}
+	//根据菜名查询菜品的id
+	public List<Map<String, Object>> findFoodIDByFoodName(String foodName) {
+		return uid.findFoodIDByFoodName(foodName);
+	}
+	//修改订单总价钱
+	public int updteOrderCountMoney(int orderID,float countMoney){
+		return uid.updteOrderCountMoney(orderID,countMoney);
 	}
 
 

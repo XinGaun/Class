@@ -81,6 +81,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	 #top_menu li a {
   	  	color:#FFBF20;
   	  }
+  	  #bottomdiv div{
+  	  	float:left;
+  	  }
   </style>
 
 </head>
@@ -103,6 +106,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		+minu+"分钟"+seconds+"秒";//获取当前的时间
 		zwd("time").innerHTML=now;//在id为time的div内显示
 		xxx=setTimeout("showTime()",1000);//1000毫秒更新一次
+		
+		init();
 	}
 		</script>
   
@@ -137,6 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </form>
  	<div class="login-page about" style="margin-top:20px;">
  	<h1 align="center">购物车</h1>
+ 	<form action="order_makeOrder.action" method="post">
     <table id="cartTable"  class="cart table table-condensed" >  
         <thead>  
             <tr>  
@@ -149,113 +155,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>  
         </thead>  
         <tbody>  
-    <c:forEach items="${findShoppingCar}" var= "product">
-        	<tr>
-        		<td><input class="check-one check" type="checkbox" /></td>
+    <c:forEach items="${cart}" var= "product">
+        	<tr class="tr">
+        		<td>
+        			<input class="check-one check" type="checkbox" />
+        		</td>
         		<td class="goods" style="width:200px">
         			 <label>${product.foodName}</label>  
         		</td>
-        		
-        	<%-- 	<td class="sl">
-					<div class="Numbers">
-						<a href="javascript:void(0);" onclick="updatenum('del');"
-							class="jian">-</a> <input id="number" name="number"
-							type="text" readonly="readonly" value="${cart.cart_buycount}" class="number_text"/> <a
-							href="javascript:void(0);" onclick="updatenum('del');"
-							class="jia">+</a>
-					</div>
-				</td> --%>
-        		
-        		
-        		<td class="number small-bold-red"><span>${product.foodPrice}</span></td> 
+          		<td class="number small-bold-red" class="shoujia">${product.foodPrice}</td>
+        	
+          		
         		 <td class="input-group" style="margin-left:-42px" width="150px" >  
-                    <span class="input-group-addon minus" id="">-</span>  
-                    <input type="text" class="number form-control input-sm"  value="10" />  
-                    <span class="input-group-addon plus">+</span>  
+                    <div class="input-group-addon minus" onclick="jian()">-</div>  
+                    <input type="text" readonly="readonly" class="number form-control input-sm"  value="${product.num}" />  
+                    <div class="input-group-addon plus">+</div>  
                 </td> 
-                <td style="color:#FE7C00;" id="singleSum">0</td> 
-                 <td class="operation"><span class="delete btn btn-xs btn-primary">删除</span></td>  
+           
+                 <td style="color:#FE7C00;" class="xiaoji" id="singleSum">${product.countPrice}</td> 
+                 <td class="operation">
+                 	<div onclick="delTr()" class="delete btn btn-xs btn-primary">删除</div>
+                 	<div >1</div>
+                 </td>  
         	</tr>
         </c:forEach>  
-          <!--    <tr >  
-                <td ><input class="check-one check" type="checkbox" /> </td>  
-                <td class="goods">  
-                    <label>Item 1</label>  
-                </td>  
-                <td class="number small-bold-red"><span>76.55</span></td>  
-                <td class="input-group">  
-                    <span class="input-group-addon minus">-</span>  
-                    <input type="text" class="number form-control input-sm" value="10" />  
-                    <span class="input-group-addon plus">+</span>  
-                </td>  
-                <td class="subtotal number small-bold-red">101</td>  
-                <td class="operation"><span class="delete btn btn-xs btn-primary">删除</span></td>  
-            </tr>  
-            <tr>  
-                <td ><input class="check-one check" type="checkbox" /></td>  
-                <td class="goods">  
-                    <label>Item 2</label>  
-                </td>  
-                <td class="number small-bold-red"><span>1100</span></td>  
-                <td class="input-group">  
-                    <span class="input-group-addon minus">-</span>  
-                    <input type="text" class="number form-control input-sm" value="1" />  
-                    <span class="input-group-addon plus">+</span>  
-                </td>  
-                <td class="subtotal number small-bold-red">352</td>  
-                <td class="operation"><span class="delete btn btn-xs btn-primary">删除</span></td>  
-            </tr>  
-            <tr>  
-                <td ><input class="check-one check" type="checkbox" /></td>  
-                <td class="goods">  
-                    <label>Item 3</label>  
-                </td>  
-                <td class="number small-bold-red"><span>1200</span></td>  
-                <td class="input-group">  
-                    <span class="input-group-addon minus">-</span>  
-                    <input type="text" class="number form-control input-sm" value="1" />  
-                    <span class="input-group-addon plus">+</span>  
-                </td>  
-                <td class="subtotal number small-bold-red">9876.55</td>  
-                <td class="operation"><span class="delete btn btn-xs btn-primary">删除</span></td>  
-            </tr>  
-            <tr>  
-                <td ><input class="check-one check" type="checkbox" /></td>  
-                <td class="goods">  
-                    <label>Item 4</label>  
-                </td>  
-                <td class="number small-bold-red"><span>1400</span></td>  
-                <td class="input-group">  
-                    <span class="input-group-addon minus">-</span>  
-                    <input type="text" class="number form-control input-sm" value="1" />  
-                    <span class="input-group-addon plus">+</span>  
-                </td>  
-                <td class="subtotal number small-bold-red">9876.55</td>  
-                <td class="operation"><span class="delete btn btn-xs btn-primary">删除</span></td>  
-            </tr>   --> 
         </tbody>  
     </table>  
 
     <div class="row"> 
      <a href="">首页</a><a href="">尾页</a><a href="">上一页</a><a href="">下一页</a>
         <div class="col-md-12 col-lg-12 col-sm-12">  
-            <div style="border-top:1px solid gray;padding:4px 10px;">  
-           <!--  <a  type="button" id ="del"class="btn btn-danger" value="删除所选">
-             <span id="del"><img id="delSelect"src="photos/del_checked.jpg"></img></span> --> 
-           <input type="button" id="delSelect"class="btn btn-danger" value="删除所选">
-                <div style="margin-left:20px;" class="pull-right total">  
-                    <label>金额合计:<span class="currency">￥</span><span id="priceTotal" class="large-bold-red">0.00</span></label>  
-                </div>  
-                <div class="pull-right">  
-                    <label>您选择了<span id="itemCount" class="large-bold-red" style="margin:0 4px;"></span>种菜，共计<span id="qtyCount" class="large-bold-red" style="margin:0 4px;"></span>个</label>  
-                </div>  
-                <div class="pull-right selected" id="selected">  
-                    <span id="selectedTotal"></span>  
-                </div>  
+            <div id="bottomdiv" style="border-top:1px solid gray;padding:4px 10px;"> 
+           		<div>
+          			<input type="button" id="delSelect" class="btn btn-danger" value="删除所选">
+          		</div>
+            	<div style="margin:6px 0px 0px 200px; font-size:15px">
+                	<label>金额合计:&nbsp;&nbsp;
+                   	<input type="text" size="4"style="border:0px white;color:red" readonly="readonly" name="countMoney" id="countMoney" ><span class="currency">￥</span><span style="color:red" class="large-bold-red"></span><span>元</span></label>  
+                    <label style="margin-left:30px;">您选择了&nbsp;&nbsp;<span id="itemCount" class="large-bold-red" style="color:red;margin:0 4px;"></span>&nbsp;&nbsp;种菜品&nbsp;&nbsp;&nbsp;&nbsp;共计&nbsp;&nbsp;<span id="qtyCount" style="color:red"class="large-bold-red" style="margin:0 4px;"></span>&nbsp;&nbsp;份</label>
+            	</div> 
+            	<div style="margin-left:150px">
+          			<input type="submit" id="addOrder" class="btn btn-info" value="确认订单">
+                </div>
             </div>  
         </div>  
-    </div>  
+    </div> 
 	</div>
+    </form> 
+
   </body>
   <script type="text/javascript">
 	//选中全部的复选框
@@ -280,5 +227,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			);
 		}
 	);
+	//总价
+	function init(){
+		var countPrice = 0.00;//总价
+		var foodcount = 0 ;//获取菜品总个数
+		var foodtype= document.getElementsByTagName("tr").length-1;	
+		$(".tr").each(function(){
+			//获取单品菜品的小计
+			 countPrice = countPrice+parseFloat($(this).find(".xiaoji").text());
+			//获取菜品总份数
+			 foodcount = foodcount + parseInt($(this).find(".input-sm").val());
+		});
+		var countPrice = countPrice;
+		$("#countMoney").val(countPrice);
+		$("#itemCount").text(foodtype);
+		$("#qtyCount").text(foodcount);
+	}
+		//自加
+		$(".plus").click(function() { //加
+			var input = $(this).parent().find("input").val();//获取input内的值
+			var b = parseInt(input) +1;//自加
+			$(this).parent().find("input").val(b);//将自加的值放入input框内
+			var foodPrice=parseFloat($(this).parent().parent().children().first().next().next().text());//获取售价
+			$(this).parent().parent().find(".xiaoji").text(parseFloat(b*foodPrice));//小计计算结果
+		});
+		//进行自减操作
+		$(".minus").click(function() { //减
+			var input = $(this).parent().find("input").val();//获取input内的值
+			var b = parseInt(input) -1;//自减
+			if(b==0){//判断是否为0，当为0时，设置为1
+				b=1;
+			}
+			$(this).parent().find("input").val(b);//将自加的值放入input框内
+			var foodPrice=parseFloat($(this).parent().parent().children().first().next().next().text());//获取售价
+			$(this).parent().parent().find(".xiaoji").text(b*foodPrice);//小计计算结果
+		});
+		/* //删除一行
+		function delTr(){
+			$(this).each(function(){
+				var b = $(this).parent().children().first().next().html();
+				alert(b);
+			});
+		} */
   </script>
 </html>

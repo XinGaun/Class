@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.util;
+package zwd.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,11 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.entity.OrderEntity;
+import zwd.entity.OrderEntity;
+
 
 public class BaseDaoZ {
 	static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	static String url="jdbc:sqlserver://localhost:1433; databaseName=orders";
+	//static String url="jdbc:sqlserver://localhost:1433; databaseName=orders";
+	static String url="jdbc:sqlserver://172.16.22.61:1433; databaseName=orders";
 	static String user="sa";
 	static String password="123456";
 	Connection conn=null;
@@ -130,46 +132,6 @@ public class BaseDaoZ {
 			closeConnection(ps, conn, rs);
 		}
 		return objectList;
-	}
-	public ArrayList<OrderEntity> executeQuery1(String sql,String sql1,Object[] params){
-		List <Map<String, Object>> objectList=new ArrayList <Map<String, Object>>();
-		Connection conn=getConnection();
-		ArrayList<OrderEntity> arrayList = new ArrayList<OrderEntity>();
-		try {
-			ps=conn.prepareStatement(sql);
-	
-			ps=setParam(ps, params);
-			rs=ps.executeQuery();
-			
-			ps1=conn.prepareStatement(sql1);
-			ps1=setParam(ps1, params);
-			rs1=ps1.executeQuery();
-			rs1.next();
-			
-		ResultSetMetaData rsmd = rs.getMetaData();//�����ڻ�ȡ���� ResultSet �������е����ͺ�������Ϣ�Ķ���
-		
-		while(rs.next()){//ѭ���������е���
-			//��һ����ݷ�װ��һ��map���ϣ�����ٰ�map��װ��list
-			OrderEntity oe = new OrderEntity();
-			oe.setCountPrice(rs1.getInt(1));
-			oe.setOrderID(rs.getInt("orderID"));
-			oe.setOrderStatus(rs.getString("orderStatus"));
-			oe.setOrderTime(rs.getDate("orderTime"));
-			arrayList.add(oe);
-			
-			/*Map<String, Object> rowMap=new HashMap<String, Object>();
-			for (int i = 0; i < rsmd.getColumnCount(); i++) {//ѭ���������е���
-				rowMap.put(rsmd.getColumnName(i+1), rs.getObject(i+1));//��ȡ����
-			}
-			objectList.add(rowMap);*/
-		}
-		//System.out.println(rsmd.getColumnCount());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			closeConnection(ps, conn, rs);
-		}
-		return arrayList;
 	}
 	
 }
