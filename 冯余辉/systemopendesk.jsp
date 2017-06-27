@@ -36,23 +36,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	#desk{
 		height:1000px;
+		background-color:#FFFFFF;	
+		margin-top:50px;
 	}
 	#homedesk{
 		height:1000px;
 		display:none;
+		margin-top:50px;
 	}
 	.col-md-1{
 		height:80px;
 		margin:10px;
 		width: 100px;
-		border: 1px solid #FFCCFF;
-		background: #0099FF;
+		
 	}
 	.div-bt{
 		margin-left:30px;
 	}
 	#div-li ul li{
-		color:#FFFFFF;
+		font-size:13px;
+	}
+	#div-li ul li a{
+		font-size:15px;
+		color:blue;
 	}
 	.modal-body{
 		margin-left:100px;
@@ -63,6 +69,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	.content{
 		height:100px;
+	}
+	.img{
+		width:80px;
+		height:80px;
+		margin-top:-50px;
+	}
+	#div-li{
+		margin-top:50px:
 	}
 </style>
 <title>图片列表</title>
@@ -86,27 +100,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>-->
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
 			
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">普通餐桌</button><button type="button" class="btn btn-primary" onclick="changehome()">包厢</button> </span> <span class="r"><strong></strong> </span> </div>
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">普通餐桌</button><button type="button" class="btn btn-primary" onclick="changehome()">包厢</button> </span> <span class="r"><strong></strong> </span> </div>
 			
-				<div class="mt-20 ">
-					<div  id="desk" class="col-md-10">
-					<c:forEach items="${desklistone}" var="li">
-						<div class="col-md-1 btn btn-default" id="div-li"> 
-							<ul>
-								<li>桌号:${li.deskID }</li>
-								<li class="li">状态:${li.statuname}</li>
-								
-							</ul>
-						</div>
-					</c:forEach>
+			<div class="mt-20 ">
+			<div class="div"></div>
+				<div  id="desk" class="col-md-10">
+						<c:forEach items="${desklistone}" var="li">
+							<div class="col-md-1 " id="div-li"> 
+								<ul>
+									<img class="img" src="../img/1aaa.jpg">
+									<li>桌号:${li.deskID }</li>
+									<li class="li">状态:${li.statuname}</li>
+									<li><a href="login_Information.action?informationdeskid=${li.deskID }">桌台详情</a></li>
+								</ul>
+							</div>
+						</c:forEach>
 				</div>
 				<div id="homedesk" class="col-md-10">
 					<c:forEach items="${desklistsecond}" var="li">
-						<div class="col-md-1  btn btn-default" id="div-li">
+						<div class="col-md-1 " id="div-li">
 							<ul >
+								<img class="img" src="../img/1aaa.jpg">
 								<li>桌号:${li.deskID }</li>
 								<li class="li">状态:${li.statuname}</li>
-								
+								<li><a href="login_Information.action?informationdeskid=${li.deskID }">桌台详情</a></li>
 							</ul>
 						</div>
 					</c:forEach>

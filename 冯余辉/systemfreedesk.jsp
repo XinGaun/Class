@@ -40,14 +40,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.col-md-1{
 		height:80px;
 		margin:10px;
-		width: 100px;
-		border: 1px solid #FFCCFF;
-		background: #0099FF;
+		width: 100px;	
 		
 	}
 	#div-li ul li{
-		color:#FFFFFF;
+		color:black;
 	}
+	#div-li ul li a{
+		color:blue;
+	}
+	.div{
+		height:50px;
+	}
+	.img{
+		width:80px;
+		height:80px;
+		margin-top:-50px;
+	}
+	
 </style>
 <script>
 	function changedesk(){
@@ -81,22 +91,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
 			<a onclick="location.href='systemopendesk.jsp'"class="btn btn-default">返回</a>
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">可用的大厅</button><button type="button" class="btn btn-primary" onclick="changehome()">可用的包厢</button> </span> <span class="r"><strong></strong> </span> </div>
-			
+			<div class="div"></div>
 			<div  id="desk" class="col-md-10">
 				<c:forEach items="${list}" var="li">
-					<div class="col-md-1 btn btn-default" id="div-li"> 
+					<div class="col-md-1 " id="div-li"> 
 						<ul >
+							<img class="img" src="../img/1aaa.jpg">
 							<li>桌号:${li.deskID }</li>
 							<li>人数:${li.deskSize }</li>
-							<li><a href="login_opendesk.action?opendeskid=${li.deskID }">开台</a></li>
+							<li><a  href="login_opendesk.action?opendeskid=${li.deskID }">开台</a></li>
 						</ul>
 					</div>
 				</c:forEach>
 			</div>
 			<div id="homedesk" class="col-md-10">
 				<c:forEach items="${homelist}" var="li">
-					<div class="col-md-1  btn btn-default" id="div-li">
+					<div class="col-md-1  " id="div-li">
 						<ul >
+							<img class="img" src="../img/1aaa.jpg">
 							<li>桌号:${li.deskID }</li>
 							<li>人数:${li.deskSize }</li>
 						<li><a href="login_opendesk.action?opendeskid=${li.deskID }">开台</a></li>
@@ -121,18 +133,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript"> 
-  $(".a").click(function(){
-  	var r=confirm("是否修改状态");
-  if (r==true)
-    {
-     return true;
-    }
-  else if(r==false)
-    {
-     return false;
-    }
-  });
+<script type="text/javascript">
+
 $('.table-sort').dataTable({
 	//"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 	//"bStateSave": true,//状态保存
@@ -142,6 +144,7 @@ $('.table-sort').dataTable({
 	//]
 });
 /*图片-添加*/
+/*
 function picture_add(title,url){
 	var index = layer.open({
 		type: 2,
@@ -149,8 +152,9 @@ function picture_add(title,url){
 		content: url
 	});
 	layer.full(index);
-}
+}*/
 /*图片-查看*/
+/*
 function picture_show(title,url,id){
 	var index = layer.open({
 		type: 2,
@@ -158,8 +162,9 @@ function picture_show(title,url,id){
 		content: url
 	});
 	layer.full(index);
-}
+}*/
 /*图片-审核*/
+/*
 function picture_shenhe(obj,id){
 	layer.confirm('审核文章？', {
 		btn: ['通过','不通过'], 
@@ -177,8 +182,9 @@ function picture_shenhe(obj,id){
 		$(obj).remove();
     	layer.msg('未通过', {icon:5,time:1000});
 	});	
-}
+}*/
 /*图片-下架*/
+/*
 function picture_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
@@ -187,8 +193,10 @@ function picture_stop(obj,id){
 		layer.msg('已下架!',{icon: 5,time:1000});
 	});
 }
+*/
 
 /*图片-发布*/
+/*
 function picture_start(obj,id){
 	layer.confirm('确认要发布吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
@@ -196,13 +204,14 @@ function picture_start(obj,id){
 		$(obj).remove();
 		layer.msg('已发布!',{icon: 6,time:1000});
 	});
-}
+}*/
 /*图片-申请上线*/
+/*
 function picture_shenqing(obj,id){
 	$(obj).parents("tr").find(".td-status").jsp('<span class="label label-default radius">待审核</span>');
 	$(obj).parents("tr").find(".td-manage").jsp("");
 	layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
-}
+}*/
 /*图片-编辑*/
 /*
 function picture_edit(title,url,id){

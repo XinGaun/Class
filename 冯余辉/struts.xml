@@ -12,6 +12,10 @@
 			<result name="homedesk">/xmking/systemhome.jsp</result>
 			<result name="opendesk">/xmking/systemopendesk.jsp</result>
 			<result name="freedesk">/xmking/systemfreedesk.jsp</result>
+			<result name="catchmenu">/xmking/systemorder.jsp</result>
+			<result name="shop">/xmking/systemshop.jsp</result>
+			<result name="orders">/xmking/article-list.jsp</result>
+			<result name="information">/xmking/systeminformation.jsp</result>
 		</action>
 	</package>
 </struts>    

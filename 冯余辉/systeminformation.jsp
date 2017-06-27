@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<script type="text/javascript" src="css/login.js"></script>
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
@@ -34,45 +35,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		position: absolute;
 		top:0px;
 	}
-
-	#homedesk{
-		display:none;
-		margin-top:50px;
-	}
-	#desk{
-		margin-top:50px;
-	}
-	.col-md-1{
-		height:80px;
-		margin:10px;
-		width: 100px;
-		
-		
-	}
-	#div-li ul li{
-		
-	}
-	.modal-content{
-		margin-top:50px;
-	}
-	.img{
-		width:80px;
-		height:80px;
-		margin-top:-50px;
-	}
+    
+    .div{
+    	margin:50px;
+    	font-size:20px;
+    }
+    #p{
+    	font-size:20px;
+    }
 </style>
-<script>
-	function changedesk(){
-		document.getElementById("homedesk").style.display="none";
-		document.getElementById("desk").style.display="block";
-	}
-	function changehome(){
-		document.getElementById("homedesk").style.display="block";
-		document.getElementById("desk").style.display="none";
-	}
-</script>
 <title>图片列表</title>
-<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script></head>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js">
+</script><script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+<link rel="stylesheet" href="../zwdcss/style.css" type="text/css"></link></head>
 <body>
 <!--_header 作为公共模版分离出去-->
 
@@ -80,9 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <section class="Hui-article-box" id="dd">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 转台<span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 开台 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
-		<article class="cl pd-20">
+		
 			<!-- <div class="text-c"> 日期范围：
 				<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}'})" id="logmin" class="input-text Wdate" style="width:120px;">
 				-
@@ -91,52 +66,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜图片</button> 
 			</div>-->
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
-			<a onclick="location.href='systemopendesk.jsp'"class="btn btn-default">返回</a>
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">可换的大厅</button><button type="button" class="btn btn-primary" onclick="changehome()">可换的包厢</button> </span> <span class="r"><strong></strong> </span> </div>
+		<div><a onclick="location.href='systemopendesk.jsp'" class="btn btn-primary">返回</a></div>
+		<div class="col-md-12 header">
 			
-			
-			<div  id="desk" class="col-md-10">
-				<c:forEach items="${desknotuselist}" var="li">
-					<div class="col-md-1 " id="div-li"> 
-						<ul >
-							<img class="img" src="../img/1aaa.jpg">
-							<li>桌号:${li.deskID }</li>
-							<li>人数:${li.deskSize }</li>
-							
-						</ul>
-					</div>
-				</c:forEach>
-			</div>
-			<div id="homedesk" class="col-md-10">
-				<c:forEach items="${homedesknotuselist}" var="li">
-					<div class="col-md-1  " id="div-li">
-						<ul >
-						 	<img class="img" src="../img/1aaa.jpg">
-							<li>桌号:${li.deskID }</li>
-							<li>人数:${li.deskSize }</li>
-							
-						</ul>
-					</div>
-				</c:forEach>
-			</div>
 			<div>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-s">转台</button>
-					<div class="modal fade bs-example-modal-s div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-					  <div class="modal-dialog modal-sm" role="document">
-					    <div class="modal-content">
-					      	<form action="login_change.action" method="get">	
-									桌号:<input type="text" name="deskid1" id="input1"><span id="span1"></span><br>
-									转到:<input type="text" name="deskid2" id="input2"><span id="span2"></span>
-									<div class="modal-footer">  
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
-										<input type="submit" class="btn btn-primary" id="input" value="确定">
-									</div> 
-						 	</form>
-					    </div>
-					  </div>
-					</div>
-				</div>
-		</article>
+				<p id="p">当前桌号:${informationdeskid }</p> 
+			</div>
+			
+			<div class="social" id="social"></div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="col-md-10 div" >
+			<c:forEach items="${aa }" var="li">
+					<div>订单号:${li.orderID }</div>
+					<div>价格:${li.countMoney }</div>
+			</c:forEach>
+			
+			<div>
+			菜品:	
+				<c:forEach items="${bb }" var="li">
+					<div>${li.foodName }:${li.num }份</div>
+				</c:forEach>
+			</div>
+		</div>	
+		<div></div>
 	</div>
 </section>
 
@@ -151,54 +105,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript"> 
-  $("#input").click(function(){
-		var aa = $("#input1").val();
- 		var bb = $("#input2").val();
- 		for ( var i = 0; i < aa.length; i++) {
-	 		for ( var j = 0; j < bb.length; j++) {
-				var a = aa.charAt(i);
-				var b = bb.charAt(j);
-				var num = parseInt(a);
-				var num1 = parseInt(b);
-				var string = /^[0-9]/;
-				if(!string.test(num)){
-					$("#span1").html("请输入正确格式");
-					return(false);
-				}else if(!string.test(num1)){
-					$("#span2").html("请输入正确格式");
-					return(false);
-				}	
-			}			
-		}
-		return(true);
-  });
-  $("#input1").click(function(){
-  	$("#span1").html("输入数字");
-  });
-  $("#input2").click(function(){
-  	$("#span2").html("输入数字");
-  });
-  $(".a").click(function(){
-  	var r=confirm("是否修改状态");
-  if (r==true)
-    {
-     return true;
-    }
-  else if(r==false)
-    {
-     return false;
-    }
-  });
+<script type="text/javascript">
+	
 $('.table-sort').dataTable({
 	//"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 	//"bStateSave": true,//状态保存
+	
 	//"aoColumnDefs": [
 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
 	 // {"orderable":false,"aTargets":[0,8]}// 制定列不参与排序
 	//]
 });
 /*图片-添加*/
+/*
 function picture_add(title,url){
 	var index = layer.open({
 		type: 2,
@@ -206,8 +125,9 @@ function picture_add(title,url){
 		content: url
 	});
 	layer.full(index);
-}
+}*/
 /*图片-查看*/
+/*
 function picture_show(title,url,id){
 	var index = layer.open({
 		type: 2,
@@ -215,8 +135,9 @@ function picture_show(title,url,id){
 		content: url
 	});
 	layer.full(index);
-}
+}*/
 /*图片-审核*/
+/*
 function picture_shenhe(obj,id){
 	layer.confirm('审核文章？', {
 		btn: ['通过','不通过'], 
@@ -234,8 +155,9 @@ function picture_shenhe(obj,id){
 		$(obj).remove();
     	layer.msg('未通过', {icon:5,time:1000});
 	});	
-}
+}*/
 /*图片-下架*/
+/*
 function picture_stop(obj,id){
 	layer.confirm('确认要下架吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
@@ -243,9 +165,10 @@ function picture_stop(obj,id){
 		$(obj).remove();
 		layer.msg('已下架!',{icon: 5,time:1000});
 	});
-}
+}*/
 
 /*图片-发布*/
+/*
 function picture_start(obj,id){
 	layer.confirm('确认要发布吗？',function(index){
 		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="picture_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
@@ -253,13 +176,14 @@ function picture_start(obj,id){
 		$(obj).remove();
 		layer.msg('已发布!',{icon: 6,time:1000});
 	});
-}
+}*/
 /*图片-申请上线*/
+/*
 function picture_shenqing(obj,id){
 	$(obj).parents("tr").find(".td-status").jsp('<span class="label label-default radius">待审核</span>');
 	$(obj).parents("tr").find(".td-manage").jsp("");
 	layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
-}
+}*/
 /*图片-编辑*/
 /*
 function picture_edit(title,url,id){

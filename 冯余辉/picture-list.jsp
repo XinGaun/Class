@@ -34,43 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		position: absolute;
 		top:0px;
 	}
-
-	#homedesk{
-		display:none;
-		margin-top:50px;
-	}
-	#desk{
-		margin-top:50px;
-	}
-	.col-md-1{
-		height:80px;
-		margin:10px;
-		width: 100px;
-		
-		
-	}
-	#div-li ul li{
-		
-	}
-	.modal-content{
-		margin-top:50px;
-	}
-	.img{
-		width:80px;
-		height:80px;
-		margin-top:-50px;
-	}
 </style>
-<script>
-	function changedesk(){
-		document.getElementById("homedesk").style.display="none";
-		document.getElementById("desk").style.display="block";
-	}
-	function changehome(){
-		document.getElementById("homedesk").style.display="block";
-		document.getElementById("desk").style.display="none";
-	}
-</script>
 <title>图片列表</title>
 <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script></head>
 <body>
@@ -80,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <section class="Hui-article-box" id="dd">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 转台<span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 桌台管理 <span class="c-gray en">&gt;</span>  <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<!-- <div class="text-c"> 日期范围：
@@ -91,51 +55,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜图片</button> 
 			</div>-->
 			<!--  <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="picture_add('添加图片','picture-add.jsp')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加图片</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
-			<a onclick="location.href='systemopendesk.jsp'"class="btn btn-default">返回</a>
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> <button type="button" class="btn btn-primary" onclick="changedesk()">可换的大厅</button><button type="button" class="btn btn-primary" onclick="changehome()">可换的包厢</button> </span> <span class="r"><strong></strong> </span> </div>
-			
-			
-			<div  id="desk" class="col-md-10">
-				<c:forEach items="${desknotuselist}" var="li">
-					<div class="col-md-1 " id="div-li"> 
-						<ul >
-							<img class="img" src="../img/1aaa.jpg">
-							<li>桌号:${li.deskID }</li>
-							<li>人数:${li.deskSize }</li>
-							
-						</ul>
-					</div>
-				</c:forEach>
-			</div>
-			<div id="homedesk" class="col-md-10">
-				<c:forEach items="${homedesknotuselist}" var="li">
-					<div class="col-md-1  " id="div-li">
-						<ul >
-						 	<img class="img" src="../img/1aaa.jpg">
-							<li>桌号:${li.deskID }</li>
-							<li>人数:${li.deskSize }</li>
-							
-						</ul>
-					</div>
-				</c:forEach>
-			</div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="glyphicon glyphicon-plus"><a href="login_add.action" onclick="datadel()" class="btn btn-danger radius"><i class="glyphicon glyphicon-plus">&#xe6e2;</i> 增加餐桌</a> </span> <span class="r"><strong></strong> </span> </div>
 			<div>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-s">转台</button>
-					<div class="modal fade bs-example-modal-s div" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-					  <div class="modal-dialog modal-sm" role="document">
-					    <div class="modal-content">
-					      	<form action="login_change.action" method="get">	
-									桌号:<input type="text" name="deskid1" id="input1"><span id="span1"></span><br>
-									转到:<input type="text" name="deskid2" id="input2"><span id="span2"></span>
-									<div class="modal-footer">  
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭  </button>  
-										<input type="submit" class="btn btn-primary" id="input" value="确定">
-									</div> 
-						 	</form>
-					    </div>
-					  </div>
-					</div>
-				</div>
+				<form action="login_query.action" method="get">
+					桌号:<input type="text" name="information" id="input_text"><input class="btn btn-primary" id="input_catch" type="submit" value="查询">
+					<a class="btn btn-primary" href="login_getdesk.action">大厅</a>
+					<a class="btn btn-primary" href="login_gethomedesk.action">包厢</a>
+				</form>
+			</div>
+			
+			<div class="mt-20">
+				<table class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
+						<tr class="text-c">
+							<th width="80">桌台号</th>
+							<th width="100">桌台人数</th>
+							<th width="100">桌台状态</th>
+							<th width="100">桌台种类</th>
+							<th width="100">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="${list }" var="li">
+						<tr class="text-c">
+							<td>${li.deskID }</td>
+							<td>${li.deskSize}</td>
+							<td>${li.statuname}</td>
+							<td id="td">${li.ztclassname}</td>
+							<td class="td-manage" ><a style="text-decoration:none" class="ml-5 a"   href="login_update.action?user=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6df;</i>使用</a> <a style="text-decoration:none" class="ml-5 a"  href="login_update1.action?use=${li.deskID }" value="deskID"/><i class="Hui-iconfont">&#xe6e2;</i>取消</a></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</article>
 	</div>
 </section>
@@ -152,32 +104,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript"> 
-  $("#input").click(function(){
-		var aa = $("#input1").val();
- 		var bb = $("#input2").val();
+  $("#input_catch").click(function(){
+		var aa = $("#input_text").val();
  		for ( var i = 0; i < aa.length; i++) {
-	 		for ( var j = 0; j < bb.length; j++) {
-				var a = aa.charAt(i);
-				var b = bb.charAt(j);
-				var num = parseInt(a);
-				var num1 = parseInt(b);
-				var string = /^[0-9]/;
-				if(!string.test(num)){
-					$("#span1").html("请输入正确格式");
-					return(false);
-				}else if(!string.test(num1)){
-					$("#span2").html("请输入正确格式");
-					return(false);
-				}	
-			}			
+			var a = aa.charAt(i);
+			var num = parseInt(a);
+			var string = /^[0-9]/;
+			if(!string.test(num)){
+				return(false);
+			}		
 		}
-		return(true);
-  });
-  $("#input1").click(function(){
-  	$("#span1").html("输入数字");
-  });
-  $("#input2").click(function(){
-  	$("#span2").html("输入数字");
+		return(true);	
   });
   $(".a").click(function(){
   	var r=confirm("是否修改状态");
@@ -283,4 +220,3 @@ function picture_del(obj,id){
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>
-
