@@ -187,83 +187,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
 				  -->
 			<div class="text-c">
-				<form action= "Hlogin_fuzzyquerystaff.action"  class="Huiform" method="post" target="_self">
-					<input type="text" class="input-text" style="width:250px" placeholder="姓名" id="" name="namephone">
+				<form action= "depart_fuzzyquerydepart.action"  class="Huiform" method="post" target="_self">
+					<input type="text" class="input-text" style="width:250px" placeholder="姓名" id="" name="depname">
 					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 				</form>
 			</div>
-<!--		
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
-				<span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-				<a href="javascript:;" onclick="member_add('添加用户','depart_findalldepart.action','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span>
-				<span class="r">共有数据：<strong>88</strong> 条</span>
-		 	</div>
--->	
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
-			
-				<a href="javascript:;" onclick="member_add('添加用户','member-add.jsp','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span>
-				<span class="r">共有数据：<strong>88</strong> 条</span>
-		 	</div>
-		 	
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="member_add('添加部门','depart-add.jsp','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加部门</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
 			<div class="mt-20">
 				<table class="table table-border table-bordered table-hover table-bg table-sort">
 					<thead>
 						<tr class="text-c">
-						
-							<th width="40">ID</th>
-							<th width="80">用户名</th>
-							<th width="40">性别</th>
-							<th width="90">年龄</th>
-							<th width="150">证件号</th>
-							<th width="100">手机</th>
-							<th width="130">地址</th>
-							<th width="150">入职时间</th>
-							<th width="100">部门</th>
+							<th width="25"><input type="checkbox" name="" value=""></th>
+							<th width="40">部门ID</th>
+							<th width="100">部门部门名称</th>
 							<th width="100">状态</th>
 							<th width="100">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${userlist}" var="user">
+					<c:forEach items="${fuzzydepart}" var="dep">
 						<tr class="text-c">
-		
-							<td>${user.staffId}</td>
-							<td>${user.staffName}</td>
-							<td>${user.sex}</td>
-							<td>${user.age}</td>
-							<td>${user.cardID}</td>
-							<td>${user.Mobile}</td>
-							<td>${user.Addres}</td>
-							<td><fmt:formatDate value="${user.Rdate}"/></td>
-							<td>${user.departname}</td>
-							
-							  <td class="text-l" style="text-align:center;"><c:if
-									test="${user.staffstatus==1}"><span class="label label-success radius" style="text-align:center;margin-left:32%;">已启用</span><input type="text" name="staffstatus"
-										value="${user.staffstatus}" style="display: none" />
-								</c:if> <c:if test="${user.staffstatus!=1}"><span class="label label-success radius" style="text-align:center;margin-left:32%;">已禁用</span><input type="text"
-										name="staffstatus" value="${user.staffstatus}" style="display: none" />
+							<td><input name="" type="checkbox" value="" ></td>
+							<td>${dep.departid}</td>
+							<td>${dep.departname}</td>
+							 <td class="text-l" style="text-align:center;"><c:if
+									test="${dep.departstatus==1}"><span class="label label-success radius" style="text-align:center;margin-left:42%;">已启用</span><input type="text" name="departstatus"
+										value="${dep.departstatus}" style="display: none" />
+								</c:if> <c:if test="${dep.departstatus!=1}"><span class="label label-success radius" style="text-align:center;margin-left:42%;">已禁用</span><input type="text"
+										name="departstatus" value="${dep.departstatus}" style="display: none" />
 								</c:if>
 							</td>
 							
 							<td class="f-14 product-brand-manage"><a class="submitee"
-								href="Hlogin_alterstaff.action?staffId=${user.staffId}&staffstatus=${user.staffstatus}&Mobile=${user.Mobile}">
-									<c:if test="${user.staffstatus==1}">禁用</c:if> <c:if test="${user.staffstatus!=1}">启用</c:if></a>
+								href="depart_alterdepart.action?departstatus=${dep.departstatus}&departid=${dep.departid}">
+									<c:if test="${dep.departstatus==1}">禁用</c:if> <c:if test="${dep.departstatus!=1}">启用</c:if></a>
 							</td>
-<!--
-							<c:if test="${user.staffstatus==1}">
-								<td class="td-status"><span class="label label-success radius">已启用</span></td>
-							</c:if>
-							<c:if test="${user.staffstatus!=1}">
-								<td class="td-status"><span class="label label-success radius">已禁用</span></td>
-							</c:if>
--->							
-<!--							<c:if test="${user.staffstatus==1}">
-								<td class="td-manage"><a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a></td>
-							</c:if>
-							<c:if test="${user.staffstatus!=1}">
-								<td class="td-manage"><a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a></td>
-							</c:if>
--->							
 						</tr>
 					</c:forEach>
 					</tbody>

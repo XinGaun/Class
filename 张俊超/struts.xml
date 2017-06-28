@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
+<constant name="struts.i18n.encoding" value="utf-8" />  
 	<package name="default" extends="struts-default">
- 		<!-- 登录、用户控制器 -->
+	
+		<!-- gx编码拦截器 -->
+		<interceptors>
+			<interceptor name="Interceptors" class="guanxin.interceptor.Interceptors"></interceptor>
+		</interceptors>
+		<!-- gx菜类控制器的配置  -->
+		<action name="classify_*" class="guanxin.Controller.ClassifyAction" method="{1}">
+			<result name="success" type="redirectAction">classify_findall.action</result>
+			<result name="findall">/xmking/product-brand.jsp</result>
+		</action>
+		<!-- gx菜品控制器的配置  -->
+		<action name="menu_*" class="guanxin.Controller.MenuAcrion" method="{1}">
+			<!-- <interceptor-ref name="Interceptors"></interceptor-ref> -->
+			<result name="tijiao">/xmking/picture-add.jsp</result>			
+			<result name="findall">/xmking/caipin.jsp</result>
+			<result name="update">/xmking/picture-xugai.jsp</result>
+		</action>
+		
+		<!-- zjc后台登录、用户控制器 -->
  		<action name="Hlogin_*" class="zhangjunchao.Controller.StaffAction" method="{1}">
  			<result name="ok" type="redirect">/xmking/_blank.jsp</result>
 			<result name="error" type="redirect">/xmking/Hlogin.jsp</result>	
@@ -12,15 +31,60 @@
 			<result name="updetestaff" type="redirect">/xmking/member-fuzzyquerystaff.jsp</result>
 			<result name="findallstaff" type="redirect">/xmking/member-list.jsp</result>
 			<result name="findall" type="redirect">/xmking/member-list.jsp</result>
+			<result name="usermode" type="redirect">/xmking/member-list.jsp</result>
 		</action>
-		<!-- 部门表控制 -->
-		 <action name="depart_*" class="zhangjunchao.Controller.DepartAction" method="{1}">
- 			<result name="findalldepart" type="redirect">/xmking/member-add.jsp</result>
+		<!-- zjc部门表控制 -->
+		<action name="depart_*" class="zhangjunchao.Controller.DepartAction" method="{1}">
+ 			<result name="departmentlist" type="redirect">/xmking/departmentlist.jsp</result>
+			<result name="fuzzyquerydepart" type="redirect">/xmking/fuzzyquerydepart.jsp</result>
+			<result name="departmentadd" type ="redirect">/xmking/departmentlist.jsp</result>
+			<result name="departmode" type ="redirect">/xmking/departmentlist.jsp</result>
 		</action>
-		<!-- 菜品控制器 -->
-		<action name="classify_*" class="zhangjunchao.Controller.ClassifyAction" method="{1}">
-			<result name="success" type="redirectAction">classify_findall.action</result>
-			<result name="findall">/xmking/product-brand.jsp</result>
+		<!--zjc省市级控制器 --> 
+ 		<action name="get_*" class="zhangjunchao.Controller.ProvincialandmunicipallinkageAction" method="{1}">
+ 			
 		</action>
+		  
+		<!-- fyh桌台配置 -->
+		<action name="login_*" class="fengyuhui.Controller.Action" method="{1}"> 
+			<result name="success">/xmking/picture-list.jsp</result>
+			<result name="fail">/xmking/systemadd.jsp</result>
+			<result name="ok">/xmking/systemcatch.jsp</result>
+			<result name="homepage">/xmking/systemchange.jsp</result>
+			<result name="desk">/zhuotai.jsp</result>
+			<result name="deskone">/xmking/systemdesk.jsp</result>
+			<result name="homedesk">/xmking/systemhome.jsp</result>
+			<result name="opendesk">/xmking/systemopendesk.jsp</result>
+			<result name="freedesk">/xmking/systemfreedesk.jsp</result>
+		</action>
+		<!-- gx后厨显示配置 -->
+		<action name="chef_*" class="guanxin.Controller.Hchu" method="{1}">
+			<result name="hou">/xmking/Hchu.jsp</result>
+		</action>
+		
+		<!-- zwd用户登录注册 -->
+		<action name="userInfoAction_*" class="zwd.action.UserInfoAction" method="{1}">
+			<result name="success">/home.jsp</result>
+			<result name="error">/index.jsp</result>
+			<result name="login">/customer_login.jsp</result>
+			<result name ="order_mess">/customer_mess.jsp</result>
+			<result name="user_message">/user_message.jsp</result>
+		</action>
+		<!-- zwd订单详情 -->
+		<action name="order_*" class="zwd.action.OrderMessAction" method="{1}">
+			<result name="customer_mess">/order_details.jsp</result>
+			<result name="login">/customer_login.jsp</result>
+			<result  type="redirectAction" name="order_mess">userInfoAction_findOrders</result>
+		</action>
+		<!-- zwd查询菜品 -->
+		<action name="food_*" class="zwd.action.FoodAction" method="{1}">
+			<result name="food_details">/food_details.jsp</result>
+			<result name="shoppingcar">shoppingcar.jsp</result>
+			<result name="success">/home.jsp</result>
+		</action>
+		<!-- zwd菜品分类 -->
+		 <action name="foodcategory_*" class="zwd.action.FoodCategoryAction" method="{1}">
+			<result name="success">/home.jsp</result>
+		</action>  
 	</package>
 </struts>    

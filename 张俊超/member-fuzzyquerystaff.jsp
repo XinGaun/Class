@@ -192,12 +192,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 				</form>
 			</div>
-			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="member_add('添加用户','depart_findalldepart.action','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
+			<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="javascript:;" onclick="member_add('添加部门','depart_findalldepart.action','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加用户</a></span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
 			<div class="mt-20">
 				<table class="table table-border table-bordered table-hover table-bg table-sort">
 					<thead>
 						<tr class="text-c">
-							<th width="25"><input type="checkbox" name="" value=""></th>
+						
 							<th width="40">ID</th>
 							<th width="80">用户名</th>
 							<th width="40">性别</th>
@@ -214,7 +214,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tbody>
 					<c:forEach items="${fuzzyquerystaff}" var="user">
 						<tr class="text-c">
-							<td><input name="" type="checkbox" value="" ></td>
 							<td>${user.staffId}</td>
 							<td>${user.staffName}</td>
 							<td>${user.sex}</td>
@@ -224,8 +223,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${user.Addres}</td>
 							<td><fmt:formatDate value="${user.Rdate}"/></td>
 							<td>${user.departname}</td>
-							<td class="td-status"><span class="label label-success radius">已启用</span></td>
-							<td class="td-manage"><a style="text-decoration:none" onClick="member_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-add.jsp','4','','510')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="change_password('修改密码','change-password.jsp','10001','600','270')" href="javascript:;" title="修改密码"><i class="Hui-iconfont">&#xe63f;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+							
+							<td class="text-l" style="text-align:center;"><c:if
+									test="${user.staffstatus==1}"><span class="label label-success radius" style="text-align:center;margin-left:32%;">已启用</span><input type="text" name="staffstatus"
+										value="${user.staffstatus}" style="display: none" />
+								</c:if> <c:if test="${user.staffstatus!=1}"><span class="label label-success radius" style="text-align:center;margin-left:32%;">已禁用</span><input type="text"
+										name="staffstatus" value="${user.staffstatus}" style="display: none" />
+								</c:if>
+							</td>
+							
+							<td class="f-14 product-brand-manage"><a class="submitee"
+								href="Hlogin_alterstaff.action?staffId=${user.staffId}&staffstatus=${user.staffstatus}&Mobile=${user.Mobile}">
+									<c:if test="${user.staffstatus==1}">禁用</c:if> <c:if test="${user.staffstatus!=1}">启用</c:if>
+							</td>
+
 						</tr>
 					</c:forEach>
 					</tbody>
